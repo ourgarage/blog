@@ -1,0 +1,19 @@
+{
+    "name": "ourgarage/blog",
+    "description": "Package Blog for Engin CMS",
+    "type": "package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "OurGarage Team",
+            "email": "ourgarage@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Ourgarage\\Blog\\": "src/"
+        }
+    }
+}
