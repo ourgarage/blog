@@ -1,0 +1,6 @@
+.admin-dashboard .content-wrapper .blog-index .for-form-inline form {
+  display: inline-block;
+}
+.admin-dashboard .blog-create .register-box {
+  margin-top: 1em !important;
+}
