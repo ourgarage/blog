@@ -20,5 +20,5 @@
 ``` PHP
 Ourgarage\Blog\BlogServiceProvider::class,
 ```
-* Run `php artisan vendor:publish`
+* Run `php artisan vendor:publish --tag=blog`
 * Run `php artisan migrate`

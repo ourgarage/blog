@@ -11,7 +11,7 @@
 @section('body')
     <div class="settings-index">
 
-    @include('admin.basis.notifications-page')
+        @include('admin.basis.notifications-page')
 
     </div>
 

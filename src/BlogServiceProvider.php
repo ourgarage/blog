@@ -21,7 +21,7 @@ class BlogServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/resources/assets' => public_path('packages/blog'),
-        ]);
+        ], 'blog');
     }
 
     /**
