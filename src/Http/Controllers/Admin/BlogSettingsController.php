@@ -12,6 +12,7 @@ class BlogSettingsController extends Controller
     public function index()
     {
         \Title::prepend(trans('dashboard.title.prepend'));
+        \Title::append(trans('blog::blog.settings.title'));
 
         return view('blog::admin.settings');
     }

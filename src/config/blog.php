@@ -23,7 +23,7 @@ return [
         'default-settings' => [
             'meta-keywords' => 'Engin CMS, Laravel',
             'meta-description' => 'This package for Engin CMS',
-            'meta-title' => 'Static Pages package',
+            'meta-title' => 'Blog package',
         ],
     ],
 ];
