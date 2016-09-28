@@ -27,8 +27,8 @@ class BlogServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->make('Ourgarage\Blog\Http\Controllers\BlogController');
+        $this->app->make('Ourgarage\Blog\Http\Controllers\Admin\BlogController');
 
-        $this->mergeConfigFrom(__DIR__.'/config/blog.php', 'packages');
+        //$this->mergeConfigFrom(__DIR__.'/config/blog.php', 'packages');
     }
 }
