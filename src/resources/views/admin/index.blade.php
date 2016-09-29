@@ -1,7 +1,7 @@
 @extends('admin.main')
 
 @section('css')
-    @include('blog::basis.css')
+    <link href='/packages/blog/css/blog.css' rel='stylesheet' type='text/css'>
 @endsection
 
 @section('body-title')
