@@ -9,9 +9,7 @@
 @endsection
 
 @section('body')
-
     <div class="blog-index">
 
     </div>
-
 @endsection
