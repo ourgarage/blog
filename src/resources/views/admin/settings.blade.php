@@ -12,5 +12,4 @@
     <div class="settings-index">
         @include('admin.basis.notifications-page')
     </div>
-
 @endsection
