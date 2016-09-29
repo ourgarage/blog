@@ -17,8 +17,8 @@
 ```
 * Run `php composer.phar update`
 * Add in your `config/app.php` file in providers:
-```PHP
-Ourgarage\Contacts\ContactsServiceProvider::class,
+``` PHP
+Ourgarage\Blog\BlogServiceProvider::class,
 ```
-* Run `php artisan vendor:publish`
+* Run `php artisan vendor:publish --tag=blog`
 * Run `php artisan migrate`
