@@ -34,10 +34,21 @@ return [
             'meta-description' => 'Meta description',
             'meta-title' => 'Meta title',
         ],
+
+        'notifications' => [
+            'category-status-update' => 'Статус категории успешно изменен',
+            'category-created-success' => 'Новая категория успешно создана',
+            'category-delete' => 'Категория была удалена',
+            'category-update' => 'Изменения успешно сохранены',
+        ],
     ],
 
     'post' => [
         'title' => 'Все публикации',
     ],
+
+    'notifications' => [
+        'blog-settings-save' => 'Настройки успешно сохранены',
+    ]
 
 ];

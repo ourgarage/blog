@@ -34,10 +34,21 @@ return [
             'meta-description' => 'Meta description',
             'meta-title' => 'Meta title',
         ],
+
+        'notifications' => [
+            'category-status-update' => 'Status of category has been successfully changed',
+            'category-created-success' => 'New category has been successfully created',
+            'category-delete' => 'Category has been successfully deleted',
+            'category-update' => 'Category has been successfully updated',
+        ],
     ],
 
     'post' => [
         'title' => 'All posts',
     ],
+
+    'notifications' => [
+        'blog-settings-save' => 'Settings has been successfully saved',
+    ]
 
 ];

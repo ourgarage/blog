@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Ourgarage\Blog\Http\Requests\BlogSettingsRequest;
+use Notifications;
 
 class BlogSettingsController extends Controller
 {
@@ -17,8 +19,17 @@ class BlogSettingsController extends Controller
         return view('blog::admin.settings');
     }
 
-    public function postSettings()
+    public function postSettings(BlogSettingsRequest $request)
     {
+        $config = [
+            'settings.blog.meta-keywords' => request('meta_keywords'),
+            'settings.blog.meta-description' => request('meta_description'),
+            'settings.blog.meta-title' => request('meta_title'),
+        ];
 
+        conf()->put($config);
+        Notifications::success(trans('blog::blog.notifications.blog-settings-save'), 'top');
+
+        return redirect()->route('blog::admin::get-settings');
     }
 }
