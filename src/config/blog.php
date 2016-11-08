@@ -32,10 +32,10 @@ return [
         ],
 
         'menu-settings' => [
-            'url' => 'blog::admin::settings',
+            'url' => 'blog::admin::get-settings',
             'caption' => 'Blog settings',
             'icon' => 'fa fa-cog',
-            'active' => 'blog::admin::settings',
+            'active' => 'blog::admin::get-settings',
         ],
 
         'default-settings' => [

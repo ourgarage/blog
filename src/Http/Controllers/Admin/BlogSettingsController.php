@@ -9,11 +9,16 @@ use App\Http\Controllers\Controller;
 
 class BlogSettingsController extends Controller
 {
-    public function index()
+    public function getSettings()
     {
         \Title::prepend(trans('dashboard.title.prepend'));
         \Title::append(trans('blog::blog.settings.title'));
 
         return view('blog::admin.settings');
+    }
+
+    public function postSettings()
+    {
+
     }
 }

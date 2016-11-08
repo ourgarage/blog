@@ -22,58 +22,60 @@
                 {!! csrf_field() !!}
 
                 <div class="form-group has-feedback">
+                    <label class="col-md-2">{{ trans('blog::blog.category.table.title') }} : *</label>
                     <div class="col-md-8">
                         <input type="text" name="title" class="form-control"
-                               placeholder="{{ trans('static-pages::pages.create.form.title') }}"
                                value="{{ isset($category) ? old('title', $category->title) : '' }}">
                         <span class="glyphicon glyphicon-header form-control-feedback"></span>
                     </div>
                 </div>
 
                 <div class="form-group has-feedback">
+                    <label class="col-md-2">{{ trans('blog::blog.category.table.uri') }} : *</label>
                     <div class="col-md-8">
                         <input type="text" name="slug" class="form-control"
-                               placeholder="{{ trans('static-pages::pages.create.form.slug') }}"
                                value="{{ isset($category) ? old('slug', $category->slug) : '' }}">
                         <span class="glyphicon glyphicon-pencil form-control-feedback"></span>
                     </div>
                 </div>
 
                 <div class="form-group has-feedback">
+                    <label class="col-md-2">{{ trans('blog::blog.category.create.meta-keywords') }} :</label>
                     <div class="col-md-8">
                         <input type="text" name="meta_keywords" class="form-control"
-                               placeholder="{{ trans('static-pages::pages.create.form.meta-keywords') }}"
                                value="{{ isset($category) ? old('meta_keywords', $category->meta_keywords) :
-                                conf('settings.static-pages.meta-keywords',
-                                config('packages.static-pages.default-settings.meta-keywords')) }}">
+                                conf('settings.blog.meta-keywords',
+                                config('packages.blog.default-settings.meta-keywords')) }}">
                         <span class="glyphicon glyphicon-tags form-control-feedback"></span>
                     </div>
                 </div>
 
                 <div class="form-group has-feedback">
+                    <label class="col-md-2">{{ trans('blog::blog.category.create.meta-description') }} :</label>
                     <div class="col-md-8">
                         <input type="text" name="meta_description" class="form-control"
-                               placeholder="{{ trans('static-pages::pages.create.form.meta-description') }}"
                                value="{{ isset($category) ? old('meta_description', $category->meta_description) :
-                                conf('settings.static-pages.meta-description',
-                                config('packages.static-pages.default-settings.meta-description')) }}">
+                                conf('settings.blog.meta-description',
+                                config('packages.blog.default-settings.meta-description')) }}">
                         <span class="glyphicon glyphicon-tags form-control-feedback"></span>
                     </div>
                 </div>
 
                 <div class="form-group has-feedback">
+                    <label class="col-md-2">{{ trans('blog::blog.category.create.meta-title') }} :</label>
                     <div class="col-md-8">
                         <input type="text" name="meta_title" class="form-control"
-                               placeholder="{{ trans('static-pages::pages.create.form.meta-title') }}"
                                value="{{ isset($category) ? old('meta_title', $category->meta_title) :
-                                conf('settings.static-pages.meta-title',
-                                config('packages.static-pages.default-settings.meta-title')) }}">
+                                conf('settings.blog.meta-title',
+                                config('packages.blog.default-settings.meta-title')) }}">
                         <span class="glyphicon glyphicon-tag form-control-feedback"></span>
                     </div>
                 </div>
 
                 <button type="submit"
-                        class="btn btn-primary btn-flat">{{ isset($category) ? trans('static-pages::pages.button.update') : trans('static-pages::pages.button.create') }}</button>
+                        class="btn btn-primary btn-flat">{{ isset($category)
+                        ? trans('blog::blog.button.update')
+                        : trans('blog::blog.button.create') }}</button>
             </form>
 
         </div>

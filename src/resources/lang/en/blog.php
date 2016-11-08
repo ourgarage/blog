@@ -27,7 +27,13 @@ return [
             'title' => 'Title',
             'created' => 'Date created',
             'options' => 'Options'
-        ]
+        ],
+
+        'create' => [
+            'meta-keywords' => 'Meta keywords',
+            'meta-description' => 'Meta description',
+            'meta-title' => 'Meta title',
+        ],
     ],
 
     'post' => [

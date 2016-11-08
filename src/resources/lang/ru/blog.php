@@ -27,7 +27,13 @@ return [
             'title' => 'Название',
             'created' => 'Дата создания',
             'options' => 'Опции'
-        ]
+        ],
+
+        'create' => [
+            'meta-keywords' => 'Meta keywords',
+            'meta-description' => 'Meta description',
+            'meta-title' => 'Meta title',
+        ],
     ],
 
     'post' => [
