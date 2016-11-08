@@ -1,7 +1,1 @@
-.admin-dashboard .content-wrapper .blog-index .for-form-inline form {
-    display: inline-block;
-}
-
-.admin-dashboard .blog-create .register-box {
-    margin-top: 1em;
-}
+.admin-dashboard .content-wrapper .blog-index .for-form-inline form{display:inline-block}.admin-dashboard .blog-create .register-box{margin-top:1em!important}.admin-dashboard .blog-box-body{background:#fff;padding:20px;border-top:0;color:#666}

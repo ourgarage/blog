@@ -22,6 +22,8 @@ class BlogServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/resources/assets' => public_path('packages/blog'),
         ], 'blog');
+
+        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
     }
 
     /**
