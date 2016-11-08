@@ -7,14 +7,13 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class BlogController extends Controller
+class BlogCategoryController extends Controller
 {
     public function index()
     {
         \Title::prepend(trans('dashboard.title.prepend'));
-        \Title::append(trans('blog::blog.index.title'));
+        \Title::append(trans('blog::blog.category.title'));
 
-        return view('blog::admin.index');
+        return view('blog::admin.category.index');
     }
-
 }

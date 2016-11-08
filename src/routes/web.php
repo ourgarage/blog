@@ -10,5 +10,7 @@ Route::group(['middleware' => 'web'], function () {
 
         Route::get('/', 'BlogController@index')->name('blog::admin::index');
         Route::get('/settings', 'BlogSettingsController@index')->name('blog::admin::settings');
+        Route::get('/categories', 'BlogCategoryController@index')->name('blog::admin::categories::index');
+        Route::get('/posts', 'BlogPostController@index')->name('blog::admin::posts::index');
     });
 });

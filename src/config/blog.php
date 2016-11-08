@@ -13,6 +13,24 @@ return [
             'active' => 'blog::admin::index',
         ],
 
+        'submenu' => [
+
+            [
+                'url' => 'blog::admin::categories::index',
+                'caption' => 'Categories',
+                'icon' => 'fa fa-list',
+                'active' => 'blog::admin::categories::index'
+            ],
+
+            [
+                'url' => 'blog::admin::posts::index',
+                'caption' => 'Posts',
+                'icon' => 'fa fa-list',
+                'active' => 'blog::admin::posts::index'
+            ]
+
+        ],
+
         'menu-settings' => [
             'url' => 'blog::admin::settings',
             'caption' => 'Blog settings',
