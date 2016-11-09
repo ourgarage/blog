@@ -5,6 +5,7 @@ namespace Ourgarage\Blog\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Notifications;
+use Illuminate\Validation\Rule;
 
 class BlogCategoryRequest extends FormRequest
 {
@@ -26,23 +27,19 @@ class BlogCategoryRequest extends FormRequest
 
     public function rules()
     {
-        if(is_null($this->route('id'))){
-            $rules = [
-                'title' => 'required|unique:categories',
-                'slug' => 'required|unique:categories',
-                'meta_keywords' => 'required',
-                'meta_description' => 'required',
-                'meta_title' => 'required',
-            ];
-        } else {
-            $rules = [
-                'title' => 'required|unique:categories,title,'.$this->route('id'),
-                'slug' => 'required|unique:categories,slug,'.$this->route('id'),
-                'meta_keywords' => 'required',
-                'meta_description' => 'required',
-                'meta_title' => 'required',
-            ];
-        }
+        $rules = [
+            'title' => [
+                'required',
+                Rule::unique('categories')->ignore($this->route('id')),
+            ],
+            'slug' => [
+                'required',
+                Rule::unique('categories')->ignore($this->route('id')),
+            ],
+            'meta_keywords' => 'required',
+            'meta_description' => 'required',
+            'meta_title' => 'required',
+        ];
 
         return $rules;
     }

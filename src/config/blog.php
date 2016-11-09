@@ -27,7 +27,7 @@ return [
                 ]
             ]
         ],
-
+        
         'menu-settings' => [
             'url' => 'blog::admin::get-settings',
             'caption' => 'Blog settings',
