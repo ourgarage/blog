@@ -41,6 +41,13 @@ return [
             'category-delete' => 'Category has been successfully deleted',
             'category-update' => 'Category has been successfully updated',
         ],
+
+        'popup' => [
+            'title' => 'Edit category',
+            'activate' => 'Do you want to activate this category?',
+            'deactivate' => 'Do you want to deactivate this category?',
+            'delete' => 'Do you want to delete this category?',
+        ],
     ],
 
     'post' => [

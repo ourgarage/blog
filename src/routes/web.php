@@ -22,7 +22,10 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/categories', 'BlogCategoryController@index')->name('blog::admin::categories::index');
         Route::get('/categories/add', 'BlogCategoryController@add')->name('blog::admin::categories::add');
         Route::post('/categories/store', 'BlogCategoryController@store')->name('blog::admin::categories::store');
+        Route::get('/categories/edit/{id}', 'BlogCategoryController@edit')->name('blog::admin::categories::edit');
         Route::put('/categories/store/{id}', 'BlogCategoryController@store')->name('blog::admin::categories::update');
+        Route::post('/categories/{id}', 'BlogCategoryController@statusUpdate')->name('blog::admin::categories::status-update');
+        Route::delete('/categories/delete/{id}', 'BlogCategoryController@destroy')->name('blog::admin::categories::delete');
 
         /**
          * Routes for posts of blog

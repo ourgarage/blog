@@ -25,7 +25,7 @@
                     <label class="col-md-2">{{ trans('blog::blog.category.table.title') }} : *</label>
                     <div class="col-md-8">
                         <input type="text" name="title" class="form-control"
-                               value="{{ isset($category) ? old('title', $category->title) : '' }}">
+                               value="{{ isset($category) ? old('title', $category->title) : old('title') }}">
                         <span class="glyphicon glyphicon-header form-control-feedback"></span>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                     <label class="col-md-2">{{ trans('blog::blog.category.table.uri') }} : *</label>
                     <div class="col-md-8">
                         <input type="text" name="slug" class="form-control"
-                               value="{{ isset($category) ? old('slug', $category->slug) : '' }}">
+                               value="{{ isset($category) ? old('slug', $category->slug) : old('slug') }}">
                         <span class="glyphicon glyphicon-pencil form-control-feedback"></span>
                     </div>
                 </div>

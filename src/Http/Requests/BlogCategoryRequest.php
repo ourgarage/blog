@@ -26,11 +26,23 @@ class BlogCategoryRequest extends FormRequest
 
     public function rules()
     {
-        $rules = [
-            'meta_keywords' => 'required',
-            'meta_description' => 'required',
-            'meta_title' => 'required',
-        ];
+        if(is_null($this->route('id'))){
+            $rules = [
+                'title' => 'required|unique:categories',
+                'slug' => 'required|unique:categories',
+                'meta_keywords' => 'required',
+                'meta_description' => 'required',
+                'meta_title' => 'required',
+            ];
+        } else {
+            $rules = [
+                'title' => 'required|unique:categories,title,'.$this->route('id'),
+                'slug' => 'required|unique:categories,slug,'.$this->route('id'),
+                'meta_keywords' => 'required',
+                'meta_description' => 'required',
+                'meta_title' => 'required',
+            ];
+        }
 
         return $rules;
     }

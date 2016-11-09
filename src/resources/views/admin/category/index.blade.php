@@ -27,23 +27,24 @@
                     @foreach($categories as $category)
                         <tr>
                             <th>{{ $category->id }}</th>
-                            <td><a href="/pages/{{ $category->slug }}" target="_blank">{{ $category->slug }}</a></td>
+                            <td><a href="/blog/category/{{ $category->slug }}" target="_blank">{{ $category->slug }}</a>
+                            </td>
                             <td>{{ $category->title }}</td>
                             <td>{{ df($category->created_at) }}</td>
                             <td class="for-form-inline">
-                                <form action="{{ route('static-pages::admin::status-update', ['id' => $category->id]) }}"
+                                <form action="{{ route('blog::admin::categories::status-update', ['id' => $category->id]) }}"
                                       method="POST">
                                     {{ csrf_field() }}
-                                    @if($category->status == \Ourgarage\StaticPages\Models\StaticPage::STATUS_ACTIVE)
+                                    @if($category->status == \Ourgarage\Blog\Models\Category::STATUS_ACTIVE)
                                         <button type="submit"
-                                                onclick="return buttonConfirmation(event, '@lang('static-pages::pages.edit.deactivate')')"
+                                                onclick="return buttonConfirmation(event, '@lang('blog::blog.category.popup.deactivate')')"
                                                 class="btn btn-xs btn-success" data-toggle="tooltip"
                                                 data-placement="top"
                                                 title="{{ trans('users.tooltip.status') }}"><i class="fa fa-check"></i>
                                         </button>
                                     @else
                                         <button type="submit"
-                                                onclick="return buttonConfirmation(event, '@lang('static-pages::pages.edit.activate')')"
+                                                onclick="return buttonConfirmation(event, '@lang('blog::blog.category.popup.activate')')"
                                                 class="btn btn-xs btn-danger" data-toggle="tooltip" data-placement="top"
                                                 title="{{ trans('users.tooltip.status') }}"><i
                                                     class="fa fa-power-off"></i>
@@ -51,18 +52,18 @@
                                     @endif
                                 </form>
 
-                                <a href="{{ route('static-pages::admin::page-edit', ['id' => $category->id]) }}"
+                                <a href="{{ route('blog::admin::categories::edit', ['id' => $category->id]) }}"
                                    class="btn btn-xs btn-warning" data-toggle="tooltip" data-placement="top"
                                    title="{{ trans('users.tooltip.edit') }}">
                                     <i class="fa fa-pencil"></i>
                                 </a>
 
-                                <form action="{{ route('static-pages::admin::page-delete', ['id' => $category->id]) }}"
+                                <form action="{{ route('blog::admin::categories::delete', ['id' => $category->id]) }}"
                                       method="POST">
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
                                     <button type="submit"
-                                            onclick="return buttonConfirmation(event, '@lang('static-pages::pages.edit.delete')')"
+                                            onclick="return buttonConfirmation(event, '@lang('blog::blog.category.popup.delete')')"
                                             class="btn btn-xs btn-danger" data-toggle="tooltip" data-placement="top"
                                             title="{{ trans('users.tooltip.delete') }}">
                                         <i class="fa fa-remove"></i></button>
