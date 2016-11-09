@@ -28,8 +28,6 @@ class BlogCategoryRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            //'title' => 'required|unique:categories,title,' . $this->route('id'),
-            //'slug' => 'required|unique:categories,slug,' . $this->route('id'),
             'title' => [
                 'required',
                 Rule::unique('categories')->ignore($this->route('id')),
