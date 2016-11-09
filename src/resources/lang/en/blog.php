@@ -8,6 +8,7 @@ return [
 
     'button' => [
         'create' => 'Create',
+        'create-category' => 'Create new category',
         'update' => 'Update',
         'save' => 'Save',
     ],
@@ -19,6 +20,7 @@ return [
     'category' => [
         'title' => 'All Categories',
         'no-categories' => 'You have no categories',
+        'must-category' => 'First, you must create at least one category',
         'add' => 'Create category',
         'edit' => 'Edit category',
 
@@ -52,6 +54,24 @@ return [
 
     'post' => [
         'title' => 'All posts',
+        'no-posts' => 'You have no posts',
+        'add' => 'Create post',
+        'edit' => 'Edit post',
+        'category' => 'Select category',
+
+        'notifications' => [
+            'post-status-update' => 'Status of post has been successfully changed',
+            'post-created-success' => 'New post has been successfully created',
+            'post-delete' => 'Post has been successfully deleted',
+            'post-update' => 'Post has been successfully updated',
+        ],
+
+        'popup' => [
+            'title' => 'Edit post',
+            'activate' => 'Do you want to activate this post?',
+            'deactivate' => 'Do you want to deactivate this post?',
+            'delete' => 'Do you want to delete this post?',
+        ],
     ],
 
     'notifications' => [
