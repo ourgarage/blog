@@ -11,24 +11,21 @@ return [
             'caption' => 'Blog',
             'icon' => 'fa fa-book',
             'active' => 'blog::admin::index',
-        ],
+            'subitems' => [
+                [
+                    'url' => 'blog::admin::categories::index',
+                    'caption' => 'Categories',
+                    'icon' => 'fa fa-list',
+                    'active' => 'blog::admin::categories::index'
+                ],
 
-        'submenu' => [
-
-            [
-                'url' => 'blog::admin::categories::index',
-                'caption' => 'Categories',
-                'icon' => 'fa fa-list',
-                'active' => 'blog::admin::categories::index'
-            ],
-
-            [
-                'url' => 'blog::admin::posts::index',
-                'caption' => 'Posts',
-                'icon' => 'fa fa-list',
-                'active' => 'blog::admin::posts::index'
+                [
+                    'url' => 'blog::admin::posts::index',
+                    'caption' => 'Posts',
+                    'icon' => 'fa fa-list',
+                    'active' => 'blog::admin::posts::index'
+                ]
             ]
-
         ],
 
         'menu-settings' => [

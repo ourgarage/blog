@@ -26,27 +26,15 @@ class BlogPostRequest extends FormRequest
 
     public function rules()
     {
-        if(is_null($this->route('id'))){
-            $rules = [
-                'title' => 'required|unique:posts',
-                'slug' => 'required|unique:posts',
-                'category' => 'required',
-                'content' => 'required|unique:posts',
-                'meta_keywords' => 'required',
-                'meta_description' => 'required',
-                'meta_title' => 'required',
-            ];
-        } else {
-            $rules = [
-                'title' => 'required|unique:posts,title,'.$this->route('id'),
-                'slug' => 'required|unique:posts,slug,'.$this->route('id'),
-                'category' => 'required',
-                'content' => 'required|unique:posts,content,'.$this->route('id'),
-                'meta_keywords' => 'required',
-                'meta_description' => 'required',
-                'meta_title' => 'required',
-            ];
-        }
+        $rules = [
+            'title' => 'required|unique:posts,title,' . $this->route('id'),
+            'slug' => 'required|unique:posts,slug,' . $this->route('id'),
+            'category' => 'required',
+            'content' => 'required|unique:posts,content,' . $this->route('id'),
+            'meta_keywords' => 'required',
+            'meta_description' => 'required',
+            'meta_title' => 'required',
+        ];
 
         return $rules;
     }
