@@ -32,11 +32,11 @@ class BlogCategoryRequest extends FormRequest
             //'slug' => 'required|unique:categories,slug,' . $this->route('id'),
             'title' => [
                 'required',
-                Rule::unique('categories,title')->ignore($this->route('id')),
+                Rule::unique('categories')->ignore($this->route('id')),
             ],
             'slug' => [
                 'required',
-                Rule::unique('categories,slug')->ignore($this->route('id')),
+                Rule::unique('categories')->ignore($this->route('id')),
             ],
             'meta_keywords' => 'required',
             'meta_description' => 'required',
