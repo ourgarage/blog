@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Ourgarage\Blog\Http\Requests\BlogSettingsRequest;
 use Notifications;
 
 class BlogSettingsController extends Controller
@@ -19,7 +18,7 @@ class BlogSettingsController extends Controller
         return view('blog::admin.settings');
     }
 
-    public function postSettings(BlogSettingsRequest $request)
+    public function postSettings(Request $request)
     {
         $config = [
             'settings.blog.meta-keywords' => request('meta_keywords'),
