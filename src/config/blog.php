@@ -12,7 +12,6 @@ return [
             'icon' => 'fa fa-book',
             'active' => 'blog::admin::index',
             'subitems' => [
-
                 [
                     'url' => 'blog::admin::categories::index',
                     'caption' => 'Categories',
@@ -26,7 +25,6 @@ return [
                     'icon' => 'fa fa-list',
                     'active' => 'blog::admin::posts::index'
                 ]
-
             ]
         ],
 
