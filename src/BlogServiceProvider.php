@@ -22,6 +22,8 @@ class BlogServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/resources/assets' => public_path('packages/blog'),
         ], 'blog');
+
+        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
     }
 
     /**
@@ -34,6 +36,10 @@ class BlogServiceProvider extends ServiceProvider
         $this->app->make('Ourgarage\Blog\Http\Controllers\Admin\BlogController');
 
         $this->app->make('Ourgarage\Blog\Http\Controllers\Admin\BlogSettingsController');
+
+        $this->app->make('Ourgarage\Blog\Http\Controllers\Admin\BlogCategoryController');
+
+        $this->app->make('Ourgarage\Blog\Http\Controllers\Admin\BlogPostController');
 
         $this->mergeConfigFrom(__DIR__.'/config/blog.php', 'packages');
     }

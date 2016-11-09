@@ -15,4 +15,47 @@ return [
     'settings' => [
         'title' => 'Blog settings',
     ],
+
+    'category' => [
+        'title' => 'All Categories',
+        'no-categories' => 'You have no categories',
+        'add' => 'Create category',
+        'edit' => 'Edit category',
+
+        'table' => [
+            'uri' => 'URI',
+            'title' => 'Title',
+            'created' => 'Date created',
+            'options' => 'Options'
+        ],
+
+        'create' => [
+            'meta-keywords' => 'Meta keywords',
+            'meta-description' => 'Meta description',
+            'meta-title' => 'Meta title',
+        ],
+
+        'notifications' => [
+            'category-status-update' => 'Status of category has been successfully changed',
+            'category-created-success' => 'New category has been successfully created',
+            'category-delete' => 'Category has been successfully deleted',
+            'category-update' => 'Category has been successfully updated',
+        ],
+
+        'popup' => [
+            'title' => 'Edit category',
+            'activate' => 'Do you want to activate this category?',
+            'deactivate' => 'Do you want to deactivate this category?',
+            'delete' => 'Do you want to delete this category?',
+        ],
+    ],
+
+    'post' => [
+        'title' => 'All posts',
+    ],
+
+    'notifications' => [
+        'blog-settings-save' => 'Settings has been successfully saved',
+    ]
+
 ];

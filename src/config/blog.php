@@ -11,13 +11,30 @@ return [
             'caption' => 'Blog',
             'icon' => 'fa fa-book',
             'active' => 'blog::admin::index',
+            'subitems' => [
+                [
+                    'url' => 'blog::admin::categories::index',
+                    'caption' => 'Categories',
+                    'icon' => 'fa fa-list',
+                    'active' => 'blog::admin::categories::index'
+                ],
+
+                [
+                    'url' => 'blog::admin::posts::index',
+                    'caption' => 'Posts',
+                    'icon' => 'fa fa-list',
+                    'active' => 'blog::admin::posts::index'
+                ]
+            ]
         ],
 
+
+
         'menu-settings' => [
-            'url' => 'blog::admin::settings',
+            'url' => 'blog::admin::get-settings',
             'caption' => 'Blog settings',
             'icon' => 'fa fa-cog',
-            'active' => 'blog::admin::settings',
+            'active' => 'blog::admin::get-settings',
         ],
 
         'default-settings' => [
