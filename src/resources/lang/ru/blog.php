@@ -59,6 +59,14 @@ return [
         'edit' => 'Правка публикации',
         'category' => 'Выбрать категорию',
 
+        'table' => [
+            'uri' => 'URI',
+            'title' => 'Название',
+            'category' => 'Категория',
+            'created' => 'Дата создания',
+            'options' => 'Опции'
+        ],
+
         'notifications' => [
             'post-status-update' => 'Статус публикации успешно изменен',
             'post-created-success' => 'Новая публикация успешно создана',

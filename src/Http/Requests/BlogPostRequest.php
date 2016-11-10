@@ -5,6 +5,7 @@ namespace Ourgarage\Blog\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Notifications;
+use Illuminate\Validation\Rule;
 
 class BlogPostRequest extends FormRequest
 {
@@ -27,10 +28,19 @@ class BlogPostRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'title' => 'required|unique:posts,title,' . $this->route('id'),
-            'slug' => 'required|unique:posts,slug,' . $this->route('id'),
+            'title' => [
+                'required',
+                Rule::unique('posts')->ignore($this->route('id')),
+            ],
+            'slug' => [
+                'required',
+                Rule::unique('posts')->ignore($this->route('id')),
+            ],
             'category' => 'required',
-            'content' => 'required|unique:posts,content,' . $this->route('id'),
+            'content' => [
+                'required',
+                Rule::unique('posts')->ignore($this->route('id')),
+            ],
             'meta_keywords' => 'required',
             'meta_description' => 'required',
             'meta_title' => 'required',

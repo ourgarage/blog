@@ -59,6 +59,14 @@ return [
         'edit' => 'Edit post',
         'category' => 'Select category',
 
+        'table' => [
+            'uri' => 'URI',
+            'title' => 'Title',
+            'category' => 'Category',
+            'created' => 'Date created',
+            'options' => 'Options'
+        ],
+
         'notifications' => [
             'post-status-update' => 'Status of post has been successfully changed',
             'post-created-success' => 'New post has been successfully created',

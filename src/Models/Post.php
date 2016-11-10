@@ -14,4 +14,9 @@ class Post extends Model
     protected $fillable = [
         'category_id', 'status', 'title', 'slug', 'content', 'meta_keywords', 'meta_description', 'meta_title'
     ];
+
+    public function category()
+    {
+        return $this->belongsTo('Ourgarage\Blog\Models\Category');
+    }
 }
