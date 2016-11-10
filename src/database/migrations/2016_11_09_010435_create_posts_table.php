@@ -18,7 +18,6 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('category_id')->unsigned();
-            $table->foreign('category_id')->references('id')->on('categories');
             $table->string('status')->default(Post::STATUS_ACTIVE)->index();
             $table->string('title')->unique();
             $table->string('slug')->unique()->index();
@@ -28,6 +27,8 @@ class CreatePostsTable extends Migration
             $table->string('meta_title');
             $table->timestamp('published_at');
             $table->timestamps();
+
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 
