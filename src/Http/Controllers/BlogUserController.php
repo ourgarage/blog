@@ -11,11 +11,9 @@ use Ourgarage\Blog\Models\Post;
 
 class BlogUserController extends Controller
 {
-    public function index(Post $posts, Category $categories)
+    public function index(Post $posts)
     {
         $posts = $posts->where('status', Post::STATUS_ACTIVE)->latest()->take(5)->get();
-
-        $categories = $categories->where('status', Category::STATUS_ACTIVE)->get();
 
         return view('blog::site.index', compact('posts', 'categories'));
     }
@@ -27,5 +25,12 @@ class BlogUserController extends Controller
         $posts = $category->posts()->where('status', Post::STATUS_ACTIVE)->paginate(20);
 
         return view('blog::site.category', compact('category', 'posts'));
+    }
+
+    public function post(Post $post, $slug)
+    {
+        $post = $post->where('status', Post::STATUS_ACTIVE)->where('slug', $slug)->first();
+
+        return view('blog::site.post', compact('post'));
     }
 }
