@@ -24,6 +24,8 @@ class BlogUserController extends Controller
     {
         $category = $category->where('status', Category::STATUS_ACTIVE)->where('slug', $slug)->first();
 
-        return view('blog::site.category', compact('category'));
+        $posts = $category->posts()->where('status', Post::STATUS_ACTIVE)->paginate(20);
+
+        return view('blog::site.category', compact('category', 'posts'));
     }
 }

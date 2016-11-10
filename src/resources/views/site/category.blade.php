@@ -6,12 +6,13 @@
 
 @section('content')
 
-    @if(isset($category->posts))
+    @if(!$posts->isEmpty())
         <ul>
-            @foreach($category->posts as $post)
+            @foreach($posts as $post)
                 <li><a href="{{ route('blog::users::post', ['slug' => $post->slug]) }}">{{ $post->title }}</a></li>
             @endforeach
         </ul>
+        {!! $posts->render() !!}
     @else
         {{ trans('blog::blog.users.no-news') }}
     @endif
