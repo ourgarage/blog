@@ -6,8 +6,8 @@
 
 @section('content')
 
-    @if(isset($posts->posts))
-
+    @if(isset($category->posts))
+        
     @else
         {{ trans('blog::blog.users.no-news') }}
     @endif

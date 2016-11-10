@@ -24,6 +24,8 @@ class BlogServiceProvider extends ServiceProvider
         ], 'blog');
 
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
+
+        view()->composer('blog::site.partials.left-menu', \Ourgarage\Blog\Http\ViewComposers\LeftMenuComposer::class);
     }
 
     /**
