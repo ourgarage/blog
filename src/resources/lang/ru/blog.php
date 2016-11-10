@@ -3,7 +3,8 @@
 return [
 
     'index' => [
-        'title' => 'Блог'
+        'title' => 'Блог',
+        'menu' => 'Меню',
     ],
 
     'button' => [
@@ -84,6 +85,10 @@ return [
 
     'notifications' => [
         'blog-settings-save' => 'Настройки успешно сохранены',
-    ]
+    ],
 
+    'users' => [
+        'index' => 'Блог - последние новости',
+        'no-news' => 'У вас пока нет новостей'
+    ]
 ];
