@@ -49,7 +49,7 @@ class BlogPostRequest extends FormRequest
         return $rules;
     }
 
-    public function response(Array $errors)
+    public function response(array $errors)
     {
         return redirect()->back()->withInput();
     }
