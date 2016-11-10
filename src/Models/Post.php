@@ -11,6 +11,8 @@ class Post extends Model
 
     protected $table = 'posts';
 
+    protected $dates = ['published_at'];
+
     protected $fillable = [
         'category_id', 'status', 'title', 'slug', 'content', 'meta_keywords', 'meta_description', 'meta_title'
     ];
