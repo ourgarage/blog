@@ -8,6 +8,8 @@ class Post extends Model
 {
     const STATUS_ACTIVE = 1;
     const STATUS_DISABLED = 0;
+    const STATUS_DRAFT = 2;
+    const STATUS_PUBLISHED = 3;
 
     protected $table = 'posts';
 

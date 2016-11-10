@@ -26,7 +26,7 @@ class CreatePostsTable extends Migration
             $table->string('meta_keywords');
             $table->string('meta_description');
             $table->string('meta_title');
-            $table->date('published_at');
+            $table->timestamp('published_at');
             $table->timestamps();
         });
     }
