@@ -44,6 +44,7 @@ class BlogPostRequest extends FormRequest
             'meta_keywords' => 'required',
             'meta_description' => 'required',
             'meta_title' => 'required',
+            'date_published' => 'required|date',
         ];
 
         return $rules;

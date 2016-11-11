@@ -80,17 +80,10 @@
                             <select name="category" class="form-control">
                                 <option value="">...</option>
 
-                                @if(isset($post))
-                                    @foreach($categories as $category)
-                                        <option value="{{ $category->id }}"
-                                                {{ $post->category_id == $category->id ? 'selected' : '' }}>{{ $category->title }}
-                                        </option>
-                                    @endforeach
-                                @else
-                                    @foreach($categories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->title }}</option>
-                                    @endforeach
-                                @endif
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}" {{ isset($post) && $post->category_id == $category->id
+                                    ? 'selected' : '' }}>{{ $category->title }}</option>
+                                @endforeach
 
                             </select>
                         </div>
@@ -101,6 +94,17 @@
                             <textarea name="content" class="form-control" rows="5">
                                 {{ isset($post) ? old('content', $post->content) : old('content') }}
                             </textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group has-feedback">
+                        <label class="col-md-2">{{ trans('blog::blog.post.date-published') }} :</label>
+                        <div class="col-md-2">
+                            <input id="date_published" type="text" name="date_published" class="form-control"
+                                   value="{{ isset($post)
+                                   ? old('date_published', Carbon::parse($post->published_at)->format('d M Y'))
+                                   : old('date_published') }}">
+                            <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
                         </div>
                     </div>
 
@@ -127,4 +131,18 @@
 
 @section('css')
     <link href='/packages/blog/css/blog.css' rel='stylesheet' type='text/css'>
+    <link href='/libs/adminLTE/plugins/datepicker/datepicker3.css' rel='stylesheet' type='text/css'>
+@endsection
+
+@section('js')
+    <script src='/libs/adminLTE/plugins/datepicker/bootstrap-datepicker.js'></script>
+    <script src='/libs/adminLTE/plugins/datepicker/locales/bootstrap-datepicker.{{ app()->getLocale() }}.js'></script>
+    <script>
+        $('#date_published').datepicker({
+            format: 'd M yyyy',
+            //startDate: '+0d', ?? We need it?
+            language: '{{ app()->getLocale() }}',
+            todayHighlight: true
+        });
+    </script>
 @endsection
