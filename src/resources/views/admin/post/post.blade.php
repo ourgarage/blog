@@ -100,7 +100,8 @@
                     <div class="form-group has-feedback">
                         <label class="col-md-2">{{ trans('blog::blog.post.date-published') }} :</label>
                         <div class="col-md-2">
-                            <input id="date_published" type="text" name="date_published" class="form-control"
+                            <input id="date_published" type="text" name="date_published"
+                                   class="form-control" data-datepicker-params="{{ app()->getLocale() }}"
                                    value="{{ isset($post)
                                    ? old('date_published', Carbon::parse($post->published_at)->format('d M Y'))
                                    : old('date_published') }}">
@@ -136,13 +137,8 @@
 
 @section('js')
     <script src='/libs/adminLTE/plugins/datepicker/bootstrap-datepicker.js'></script>
-    <script src='/libs/adminLTE/plugins/datepicker/locales/bootstrap-datepicker.{{ app()->getLocale() }}.js'></script>
-    <script>
-        $('#date_published').datepicker({
-            format: 'd M yyyy',
-            //startDate: '+0d', ?? We need it?
-            language: '{{ app()->getLocale() }}',
-            todayHighlight: true
-        });
-    </script>
+    @if(app()->getLocale() !== 'en')
+        <script src='/libs/adminLTE/plugins/datepicker/locales/bootstrap-datepicker.{{ app()->getLocale() }}.js'></script>
+    @endif
+    <script src="/packages/blog/js/datepicker.js"></script>
 @endsection

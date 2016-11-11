@@ -30,7 +30,7 @@
                                 <td><a href="#{{ $category->slug }}" target="_blank">{{ $category->slug }}</a>
                                 </td>
                                 <td>{{ $category->title }}</td>
-                                <td>{{ df($category->created_at) }}</td>
+                                <td>{{ $category->created_at->format('Y-m-d') }}</td>
                                 <td class="for-form-inline">
                                     <form action="{{ route('blog::admin::categories::status-update', ['id' => $category->id]) }}"
                                           method="POST">
