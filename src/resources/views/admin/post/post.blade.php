@@ -103,7 +103,7 @@
                             <input id="date_published" type="text" name="date_published"
                                    class="form-control" data-datepicker-params="{{ app()->getLocale() }}"
                                    value="{{ isset($post)
-                                   ? old('date_published', df($post->published_at))
+                                   ? old('date_published', Carbon::parse($post->published_at)->format('Y-m-d H:i'))
                                    : old('date_published') }}">
                             <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
                         </div>
@@ -132,13 +132,14 @@
 
 @section('css')
     <link href='/packages/blog/css/blog.css' rel='stylesheet' type='text/css'>
-    <link href='/libs/adminLTE/plugins/datepicker/datepicker3.css' rel='stylesheet' type='text/css'>
+    <link href='/libs/downloaded/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css' rel='stylesheet'
+          type='text/css'>
 @endsection
 
 @section('js')
-    <script src='/libs/adminLTE/plugins/datepicker/bootstrap-datepicker.js'></script>
+    <script src='/libs/downloaded/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js'></script>
     @if(app()->getLocale() !== 'en')
-        <script src='/libs/adminLTE/plugins/datepicker/locales/bootstrap-datepicker.{{ app()->getLocale() }}.js'></script>
+        <script src='/libs/downloaded/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.{{ app()->getLocale() }}.js'></script>
     @endif
-    <script src="/packages/blog/js/datepicker.js"></script>
+    <script src="/packages/blog/js/datetimepicker.js"></script>
 @endsection
