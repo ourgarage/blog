@@ -103,7 +103,7 @@
                             <input id="date_published" type="text" name="date_published"
                                    class="form-control" data-datetimepicker-locale="{{ app()->getLocale() }}"
                                    value="{{ isset($post)
-                                   ? old('date_published', Carbon::parse($post->published_at)->format('Y-m-d H:i'))
+                                   ? old('date_published', Carbon::parse($post->published_at)->format('Y-m-d H:i:s'))
                                    : old('date_published') }}">
                             <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
                         </div>

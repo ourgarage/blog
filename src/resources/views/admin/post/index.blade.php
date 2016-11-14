@@ -33,8 +33,8 @@
                                 </td>
                                 <td>{{ $post->title }}</td>
                                 <td>{{ $post->category->title }}</td>
-                                <td>{{ df($post->published_at) }}</td>
-                                <td>{{ $post->created_at->format('Y-m-d') }}</td>
+                                <td>{{ Carbon::parse($post->published_at)->format('Y-m-d H:i:s') }}</td>
+                                <td>{{ df($post->created_at) }}</td>
                                 <td class="for-form-inline">
                                     <form action="{{ route('blog::admin::posts::status-update', ['id' => $post->id]) }}"
                                           method="POST">
