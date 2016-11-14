@@ -1,4 +1,4 @@
-var locale = $('#date_published').data('datepicker-params');
+var locale = $('#date_published').data('datetimepicker-locale');
 
 $('#date_published').datetimepicker({
     format: 'yyyy-mm-dd hh:ii',

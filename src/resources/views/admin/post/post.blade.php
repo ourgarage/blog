@@ -101,7 +101,7 @@
                         <label class="col-md-2">{{ trans('blog::blog.post.date-published') }} :</label>
                         <div class="col-md-2">
                             <input id="date_published" type="text" name="date_published"
-                                   class="form-control" data-datepicker-params="{{ app()->getLocale() }}"
+                                   class="form-control" data-datetimepicker-locale="{{ app()->getLocale() }}"
                                    value="{{ isset($post)
                                    ? old('date_published', Carbon::parse($post->published_at)->format('Y-m-d H:i'))
                                    : old('date_published') }}">
