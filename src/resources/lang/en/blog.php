@@ -59,6 +59,7 @@ return [
         'add' => 'Create post',
         'edit' => 'Edit post',
         'category' => 'Select category',
+        'date-published' => 'Date of publication',
 
         'table' => [
             'uri' => 'URI',

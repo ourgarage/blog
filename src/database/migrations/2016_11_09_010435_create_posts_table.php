@@ -17,16 +17,18 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('status')->default(Post::STATUS_ACTIVE)->index();
             $table->integer('category_id')->unsigned();
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->string('status')->default(Post::STATUS_ACTIVE)->index();
             $table->string('title')->unique();
             $table->string('slug')->unique()->index();
             $table->text('content');
             $table->string('meta_keywords');
             $table->string('meta_description');
             $table->string('meta_title');
+            $table->datetime('published_at');
             $table->timestamps();
+
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 

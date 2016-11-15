@@ -10,6 +10,7 @@ use Ourgarage\Blog\Models\Post;
 use Ourgarage\Blog\Models\Category;
 use Notifications;
 use Ourgarage\Blog\Http\Requests\BlogPostRequest;
+use Carbon\Carbon;
 
 class BlogPostController extends Controller
 {
@@ -56,6 +57,7 @@ class BlogPostController extends Controller
         $post->meta_keywords = request('meta_keywords');
         $post->meta_description = request('meta_description');
         $post->meta_title = request('meta_title');
+        $post->published_at = Carbon::parse(request('date_published'));
 
         $translationKey = (is_null($post->id))
             ? 'blog::blog.post.notifications.post-created-success'
