@@ -6,6 +6,6 @@
 
 @section('content')
 
-    {{ $post->content }}
+    {!! $post->content !!}
 
 @endsection
