@@ -1,8 +1,6 @@
-var locale = $('#date_published').data('datetimepicker-locale');
+var lang = $('#date_published').data('datetimepicker-locale');
 
 $('#date_published').datetimepicker({
-    format: 'yyyy-mm-dd hh:ii:ss',
-    language: locale,
-    todayHighlight: true,
-    autoclose: true
+    format: 'Y-MM-DD HH:mm:ss',
+    locale: lang
 });
