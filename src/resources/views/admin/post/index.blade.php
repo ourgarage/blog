@@ -29,7 +29,7 @@
                         @foreach($posts as $post)
                             <tr>
                                 <th>{{ $post->id }}</th>
-                                <td><a href="#{{ $post->slug }}" target="_blank">{{ $post->slug }}</a>
+                                <td><a href="{{ route('blog::users::post', ['slug' => $post->slug]) }}" target="_blank">{{ $post->slug }}</a>
                                 </td>
                                 <td>{{ $post->title }}</td>
                                 <td>{{ $post->category->title }}</td>
