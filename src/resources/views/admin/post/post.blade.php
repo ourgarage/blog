@@ -139,8 +139,5 @@
 @section('js')
     <script src='/libs/moment/moment-with-locales.min.js'></script>
     <script src='/libs/eonasdan-bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js'></script>
-    {{--@if(app()->getLocale() !== 'en')
-        <script src='/libs/downloaded/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.{{ app()->getLocale() }}.js'></script>
-    @endif--}}
     <script src="/packages/blog/js/datetimepicker.js"></script>
 @endsection
