@@ -92,7 +92,7 @@
                     <div class="form-group has-feedback">
                         <div class="col-md-8 col-md-offset-2">
                             <textarea name="content" class="form-control" rows="5">
-                                {{ isset($post) ? old('content', $post->content) : old('content') }}
+                                {!! isset($post) ? old('content', $post->content) : old('content') !!}
                             </textarea>
                         </div>
                     </div>
@@ -101,9 +101,11 @@
                         <label class="col-md-2">{{ trans('blog::blog.post.date-published') }} :</label>
                         <div class="col-md-2">
                             <input id="date_published" type="text" name="date_published"
-                                   class="form-control" data-datetimepicker-locale="{{ app()->getLocale() }}"
+                                   class="form-control"
+                                   data-datetimepicker-locale='{"lang": "{{ app()->getLocale() }}",
+                                   "format": "{{ trans('date.format.full.js') }}" }'
                                    value="{{ isset($post)
-                                   ? old('date_published', tf($post->published_at))
+                                   ? old('date_published', df($post->published_at, 'long'))
                                    : old('date_published') }}">
                             <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
                         </div>
