@@ -33,7 +33,7 @@
                                 </td>
                                 <td>{{ $post->title }}</td>
                                 <td>{{ $post->category->title }}</td>
-                                <td>{{ df($post->published_at, 'full') }}</td>
+                                <td>{{ df($post->published_at, \App\Constant\Dates::TYPE_AGO) }}</td>
                                 <td>{{ df($post->created_at) }}</td>
                                 <td class="for-form-inline">
                                     <form action="{{ route('blog::admin::posts::status-update', ['id' => $post->id]) }}"
