@@ -31,5 +31,11 @@ Route::group(['middleware' => 'web'], function () {
          * Routes for posts of blog
          */
         Route::get('/posts', 'BlogPostController@index')->name('blog::admin::posts::index');
+        Route::get('/posts/add', 'BlogPostController@add')->name('blog::admin::posts::add');
+        Route::post('/posts/store', 'BlogPostController@store')->name('blog::admin::posts::store');
+        Route::get('/posts/edit/{id}', 'BlogPostController@edit')->name('blog::admin::posts::edit');
+        Route::put('/posts/store/{id}', 'BlogPostController@store')->name('blog::admin::posts::update');
+        Route::post('/posts/{id}', 'BlogPostController@statusUpdate')->name('blog::admin::posts::status-update');
+        Route::delete('/posts/delete/{id}', 'BlogPostController@destroy')->name('blog::admin::posts::delete');
     });
 });

@@ -14,4 +14,9 @@ class Category extends Model
     protected $fillable = [
         'status', 'title', 'slug', 'meta_keywords', 'meta_description', 'meta_title'
     ];
+
+    public function posts()
+    {
+        return $this->hasMany('Ourgarage\Blog\Models\Post');
+    }
 }
