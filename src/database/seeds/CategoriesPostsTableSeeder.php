@@ -19,7 +19,7 @@ class CategoriesPostsTableSeeder extends Seeder
             $category = Category::create([
                 'status' => Category::STATUS_ACTIVE,
                 'title' => $faker->word,
-                'slug' => $faker->word,
+                'slug' => $faker->slug,
                 'meta_keywords' => $faker->sentence,
                 'meta_description' => $faker->sentence,
                 'meta_title' => $faker->sentence
@@ -31,9 +31,9 @@ class CategoriesPostsTableSeeder extends Seeder
         foreach (range(1, 30) as $post) {
             Post::create([
                 'category_id' => $faker->randomElement($category_id),
-                'status' => $faker->biasedNumberBetween($min = Post::STATUS_DISABLED, $max = Post::STATUS_ACTIVE),
+                'status' => $faker->randomElement([Post::STATUS_DISABLED, Post::STATUS_ACTIVE]),
                 'title' => $faker->sentence,
-                'slug' => $faker->regexify('[a-z]{5,10}'),
+                'slug' => $faker->slug,
                 'content' => $faker->text,
                 'meta_keywords' => $faker->sentence,
                 'meta_description' => $faker->sentence,
