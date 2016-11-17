@@ -42,11 +42,11 @@ Route::group(['middleware' => 'web'], function () {
     Route::group(['prefix' => 'blog', 'namespace' => 'Ourgarage\Blog\Http\Controllers'], function () {
 
         /**
-         * Routes for users
+         * Routes for frontend
          */
-        Route::get('/', 'BlogUserController@index')->name('blog::users::index');
-        Route::get('/category/{slug}', 'BlogUserController@category')->name('blog::users::category');
-        Route::get('/posts', 'BlogUserController@posts')->name('blog::users::posts');
-        Route::get('/post/{slug}', 'BlogUserController@post')->name('blog::users::post');
+        Route::get('/', 'BlogController@index')->name('blog::users::index');
+        Route::get('/category/{slug}', 'BlogController@category')->name('blog::users::category');
+        Route::get('/posts', 'BlogController@posts')->name('blog::users::posts');
+        Route::get('/post/{slug}', 'BlogController@post')->name('blog::users::post');
     });
 });
