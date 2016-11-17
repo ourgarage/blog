@@ -105,7 +105,7 @@
                                    data-datetimepicker-locale='{"lang": "{{ app()->getLocale() }}",
                                    "format": "{{ trans('date.format.full.js') }}" }'
                                    value="{{ isset($post)
-                                   ? old('date_published', df($post->published_at, \App\Constant\Dates::FORMAT_LONG))
+                                   ? old('date_published', df($post->published_at, \App\Constant\Dates::FORMAT_FULL))
                                    : old('date_published') }}">
                             <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
                         </div>
