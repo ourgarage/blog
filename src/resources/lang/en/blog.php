@@ -3,7 +3,9 @@
 return [
 
     'index' => [
-        'title' => 'Blog'
+        'title' => 'Blog',
+        'menu' => 'Menu',
+        'home' => 'Home',
     ],
 
     'button' => [
@@ -81,10 +83,18 @@ return [
             'deactivate' => 'Do you want to deactivate this post?',
             'delete' => 'Do you want to delete this post?',
         ],
+
+        'view' => [
+            'posted' => 'Posted'
+        ]
     ],
 
     'notifications' => [
         'blog-settings-save' => 'Settings has been successfully saved',
-    ]
+    ],
 
+    'users' => [
+        'index' => 'Blog - Last news',
+        'no-news' => 'You have no news'
+    ]
 ];

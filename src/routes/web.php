@@ -38,4 +38,15 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('/posts/{id}', 'BlogPostController@statusUpdate')->name('blog::admin::posts::status-update');
         Route::delete('/posts/delete/{id}', 'BlogPostController@destroy')->name('blog::admin::posts::delete');
     });
+
+    Route::group(['prefix' => 'blog', 'namespace' => 'Ourgarage\Blog\Http\Controllers'], function () {
+
+        /**
+         * Routes for frontend
+         */
+        Route::get('/', 'BlogController@index')->name('blog::users::index');
+        Route::get('/category/{slug}', 'BlogController@category')->name('blog::users::category');
+        Route::get('/posts', 'BlogController@posts')->name('blog::users::posts');
+        Route::get('/post/{slug}', 'BlogController@post')->name('blog::users::post');
+    });
 });

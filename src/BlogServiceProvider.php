@@ -24,6 +24,8 @@ class BlogServiceProvider extends ServiceProvider
         ], 'blog');
 
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
+
+        view()->composer('blog::site.partials.left-menu', \Ourgarage\Blog\Http\ViewComposers\LeftMenuComposer::class);
     }
 
     /**
@@ -40,6 +42,8 @@ class BlogServiceProvider extends ServiceProvider
         $this->app->make('Ourgarage\Blog\Http\Controllers\Admin\BlogCategoryController');
 
         $this->app->make('Ourgarage\Blog\Http\Controllers\Admin\BlogPostController');
+
+        $this->app->make('Ourgarage\Blog\Http\Controllers\BlogController');
 
         $this->mergeConfigFrom(__DIR__.'/config/blog.php', 'packages');
     }

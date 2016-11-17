@@ -27,7 +27,7 @@
                         @foreach($categories as $category)
                             <tr>
                                 <th>{{ $category->id }}</th>
-                                <td><a href="#{{ $category->slug }}" target="_blank">{{ $category->slug }}</a>
+                                <td><a href="{{ route('blog::users::category', ['slug' => $category->slug]) }}" target="_blank">{{ $category->slug }}</a>
                                 </td>
                                 <td>{{ $category->title }}</td>
                                 <td>{{ df($category->created_at) }}</td>
