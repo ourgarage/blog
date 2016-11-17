@@ -20,7 +20,8 @@ class BlogController extends Controller
 
     public function category(Category $category, $slug)
     {
-        $category = $category->where('status', Category::STATUS_ACTIVE)->where('slug', $slug)->first();
+        $category = $category->where('status', Category::STATUS_ACTIVE)
+            ->where('slug', $slug)->first();
 
         $posts = $category->posts()->where('status', Post::STATUS_ACTIVE)
             ->where('published_at', '<=', Carbon::now())->paginate(20);
