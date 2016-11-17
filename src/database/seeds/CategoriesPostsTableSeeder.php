@@ -25,19 +25,22 @@ class CategoriesPostsTableSeeder extends Seeder
                 'meta_title' => $faker->sentence
             ]);
 
-            foreach (range(1, 10) as $post) {
-                Post::create([
-                    'category_id' => $category->id,
-                    'status' => $faker->biasedNumberBetween($min = Post::STATUS_DISABLED, $max = Post::STATUS_ACTIVE),
-                    'title' => $faker->sentence,
-                    'slug' => $faker->regexify('[a-z]{5,10}'),
-                    'content' => $faker->text,
-                    'meta_keywords' => $faker->sentence,
-                    'meta_description' => $faker->sentence,
-                    'meta_title' => $faker->sentence,
-                    'published_at' => $faker->dateTimeThisYear($max = 'now')
-                ]);
-            }
+            $category_id[] = $category->id;
         }
+
+        foreach (range(1, 100) as $post) {
+            Post::create([
+                'category_id' => $faker->randomElement($category_id),
+                'status' => $faker->biasedNumberBetween($min = Post::STATUS_DISABLED, $max = Post::STATUS_ACTIVE),
+                'title' => $faker->sentence,
+                'slug' => $faker->regexify('[a-z]{5,10}'),
+                'content' => $faker->text,
+                'meta_keywords' => $faker->sentence,
+                'meta_description' => $faker->sentence,
+                'meta_title' => $faker->sentence,
+                'published_at' => $faker->dateTimeThisYear($max = 'now')
+            ]);
+        }
+
     }
 }
