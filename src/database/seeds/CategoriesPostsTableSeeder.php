@@ -28,7 +28,7 @@ class CategoriesPostsTableSeeder extends Seeder
             $category_id[] = $category->id;
         }
 
-        foreach (range(1, 100) as $post) {
+        foreach (range(1, 30) as $post) {
             Post::create([
                 'category_id' => $faker->randomElement($category_id),
                 'status' => $faker->biasedNumberBetween($min = Post::STATUS_DISABLED, $max = Post::STATUS_ACTIVE),
