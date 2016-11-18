@@ -98,6 +98,15 @@
                     </div>
 
                     <div class="form-group has-feedback">
+                        <label class="col-md-2">{{ trans('blog::blog.tags.title') }} :</label>
+                        <div class="col-md-8">
+                            <input type="text" name="tags" class="form-control"
+                                   value="{{ (isset($post) ? $post->tags->implode('tag', ', ') : old('tags'))  }}">
+                            <span class="glyphicon glyphicon-tags form-control-feedback"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group has-feedback">
                         <label class="col-md-2">{{ trans('blog::blog.post.date-published') }} :</label>
                         <div class="col-md-2">
                             <input id="date_published" type="text" name="date_published"

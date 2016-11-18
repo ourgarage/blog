@@ -8,6 +8,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Ourgarage\Blog\Models\Post;
 use Ourgarage\Blog\Models\Category;
+use Ourgarage\Blog\Models\PostTags;
+use Ourgarage\Blog\Models\Tags;
 use Notifications;
 use Ourgarage\Blog\Http\Requests\BlogPostRequest;
 use Carbon\Carbon;
@@ -65,6 +67,8 @@ class BlogPostController extends Controller
 
         $post->save();
 
+        $this->_setTags($request->get('tags'), $post->id);
+
         Notifications::success(trans($translationKey), 'top');
 
         return redirect()->route('blog::admin::posts::index');
@@ -90,5 +94,30 @@ class BlogPostController extends Controller
         Notifications::success(trans('blog::blog.post.notifications.post-delete'), 'top');
 
         return redirect()->back();
+    }
+
+    private function _setTags($tags_str, $post_id)
+    {
+        PostTags::where('post_id', $post_id)->delete();
+
+        $tags = explode(', ', $tags_str);
+
+        foreach ($tags as $tag) {
+            if (trim($tag) == '') {
+                continue;
+            }
+            $tag = mb_strtolower($tag);
+            $dbtag = Tags::where('tag', 'like', $tag)->first();
+            if (empty($dbtag)) {
+                $dbtag = new Tags();
+                $dbtag->tag = strip_tags($tag);
+                $dbtag->save();
+            }
+            $post_tag = new PostTags();
+
+            $post_tag->post_id = $post_id;
+            $post_tag->tag_id = $dbtag->id;
+            $post_tag->save();
+        }
     }
 }
