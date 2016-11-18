@@ -18,7 +18,7 @@ class CategoriesPostsTableSeeder extends Seeder
         foreach (range(1, 5) as $index) {
             $category = Category::create([
                 'status' => Category::STATUS_ACTIVE,
-                'title' => $faker->word,
+                'title' => $faker->unique()->word,
                 'slug' => $faker->slug,
                 'meta_keywords' => $faker->sentence,
                 'meta_description' => $faker->sentence,
