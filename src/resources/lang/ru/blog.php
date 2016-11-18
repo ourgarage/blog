@@ -90,7 +90,8 @@ return [
     ],
 
     'tags' => [
-        'title' => 'Теги'
+        'title' => 'Теги',
+        'tag' => 'Публикации по тегу'
     ],
 
     'notifications' => [

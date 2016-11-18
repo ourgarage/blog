@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Ourgarage\Blog\Models\Category;
 use Ourgarage\Blog\Models\Post;
+use Ourgarage\Blog\Models\Tags;
 
 class BlogController extends Controller
 {
@@ -39,5 +40,20 @@ class BlogController extends Controller
         }
 
         return view('blog::site.post', compact('post'));
+    }
+
+    public function getTag(Tags $tags, $tag)
+    {
+        $tags = $tags->where('tag', $tag)->first();
+
+        if(!isset($tags)){
+            return abort('404');
+        }
+
+        $posts = $tags->posts()->where('status', Post::STATUS_ACTIVE)
+            ->where('published_at', '<=', Carbon::now())
+            ->paginate(20);
+
+        return view('blog::site.tag-posts', compact('tags', 'posts'));
     }
 }

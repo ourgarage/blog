@@ -90,7 +90,8 @@ return [
     ],
 
     'tags' => [
-        'title' => 'Tags'
+        'title' => 'Tags',
+        'tag' => 'Posts by tag'
     ],
 
     'notifications' => [

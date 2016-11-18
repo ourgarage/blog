@@ -100,13 +100,13 @@ class BlogPostController extends Controller
     {
         PostTags::where('post_id', $post_id)->delete();
 
-        $tags = explode(', ', $tags_str);
+        $tags = explode(',', $tags_str);
 
         foreach ($tags as $tag) {
             if (trim($tag) == '') {
                 continue;
             }
-            $tag = mb_strtolower($tag);
+            $tag = mb_strtolower(trim($tag));
             $dbtag = Tags::where('tag', 'like', $tag)->first();
             if (empty($dbtag)) {
                 $dbtag = new Tags();

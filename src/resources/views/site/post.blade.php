@@ -15,8 +15,19 @@
                         {!! $post->content !!}
                     </div>
                 </div>
-                <div class="panel-footer text-right">{{ trans('blog::blog.post.view.posted') }}
-                    : {{ df($post->published_at, \App\Constant\Dates::TYPE_AGO) }}</div>
+                <div class="panel-footer">
+                    @if(!$post->tags->isEmpty())
+                        <span class="glyphicon glyphicon-tags"></span> Tags:
+                        @foreach($post->tags as $tag)
+                            <a href="{{ route('blog::get::tag', ['tag' => $tag->tag]) }}">{{ $tag->tag }}</a>
+                        @endforeach
+                    @endif
+                    <div class="text-right">
+                        {{ trans('blog::blog.post.view.posted') }}
+                        : {{ df($post->published_at, \App\Constant\Dates::TYPE_AGO) }}
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
