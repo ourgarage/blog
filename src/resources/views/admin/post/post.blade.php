@@ -106,6 +106,17 @@
                         </div>
                     </div>
 
+                    @if(isset($tags))
+                        <div class="form-group has-feedback">
+                            <label class="col-md-2">Popular tags:</label>
+                            <div class="col-md-8">
+                                @foreach($tags as $tag)
+                                    {{ $tag->tag }}
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
+
                     <div class="form-group has-feedback">
                         <label class="col-md-2">{{ trans('blog::blog.post.date-published') }} :</label>
                         <div class="col-md-2">

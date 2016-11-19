@@ -6,12 +6,12 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Ourgarage\Blog\Http\Requests\BlogPostRequest;
 use Ourgarage\Blog\Models\Post;
 use Ourgarage\Blog\Models\Category;
 use Ourgarage\Blog\Models\PostTags;
 use Ourgarage\Blog\Models\Tags;
 use Notifications;
-use Ourgarage\Blog\Http\Requests\BlogPostRequest;
 use Carbon\Carbon;
 
 class BlogPostController extends Controller
@@ -40,12 +40,23 @@ class BlogPostController extends Controller
     {
         $post = $post->find($id);
 
+        $allCountTags = PostTags::select('tag_id')->get()->toArray();
+
+        if(isset($allCountTags)) {
+            $countMaxTags = array_count_values(array_flatten($allCountTags));
+            arsort($countMaxTags);
+            $selectMaxCount = array_slice($countMaxTags, 0, 20, $preserve_keys = true);
+            $idPopularTags = array_keys($selectMaxCount);
+
+            $tags = Tags::find($idPopularTags);
+        }
+
         \Title::prepend(trans('dashboard.title.prepend'));
         \Title::append(trans('bog::blog.post.edit'));
 
         $categories = Category::where('status', Category::STATUS_ACTIVE)->get();
 
-        return view('blog::admin.post.post', compact('post', 'categories'));
+        return view('blog::admin.post.post', compact('post', 'categories', 'tags'));
     }
 
     public function store(BlogPostRequest $request, $id = null)
