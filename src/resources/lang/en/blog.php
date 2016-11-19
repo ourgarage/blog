@@ -91,7 +91,8 @@ return [
 
     'tags' => [
         'title' => 'Tags',
-        'tag' => 'Posts by tag'
+        'tag' => 'Posts by tag',
+        'popular' => 'Popular tags'
     ],
 
     'notifications' => [

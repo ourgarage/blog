@@ -100,39 +100,40 @@
                     <div class="form-group has-feedback">
                         <label class="col-md-2">{{ trans('blog::blog.tags.title') }} :</label>
                         <div class="col-md-8">
-                            <input type="text" name="tags" class="form-control"
-                                   value="{{ (isset($post) ? $post->tags->implode('tag', ', ') : old('tags'))  }}">
-                            <span class="glyphicon glyphicon-tags form-control-feedback"></span>
+                            <input id="inputTags" type="text" name="tags" class="form-control"
+                                   value="{{ (isset($post) ? $post->tags->implode('tag', ', ') : old('tags'))  }}"
+                                   data-role="tagsinput">
                         </div>
                     </div>
 
-                    @if(isset($tags))
-                        <div class="form-group has-feedback">
-                            <label class="col-md-2">Popular tags:</label>
-                            <div class="col-md-8">
-                                @foreach($tags as $tag)
-                                    {{ $tag->tag }}
-                                @endforeach
+                        @if(!$tags->isEmpty())
+                            <div class="form-group has-feedback">
+                                <label class="col-md-2">{{ trans('blog::blog.tags.popular') }} :</label>
+                                <div class="col-md-8">
+                                    @foreach($tags as $tag)
+                                        <a href="#{{ $tag->tag }}" class="add-tag btn btn-xs btn-success"
+                                           data-tag="{{ $tag->tag }}">{{ $tag->tag }}</a>
+                                    @endforeach
+                                </div>
                             </div>
-                        </div>
-                    @endif
+                        @endif
 
-                    <div class="form-group has-feedback">
-                        <label class="col-md-2">{{ trans('blog::blog.post.date-published') }} :</label>
-                        <div class="col-md-2">
-                            <input id="date_published" type="text" name="date_published"
-                                   class="form-control"
-                                   data-datetimepicker-locale='{"lang": "{{ app()->getLocale() }}",
+                        <div class="form-group has-feedback">
+                            <label class="col-md-2">{{ trans('blog::blog.post.date-published') }} :</label>
+                            <div class="col-md-2">
+                                <input id="date_published" type="text" name="date_published"
+                                       class="form-control"
+                                       data-datetimepicker-locale='{"lang": "{{ app()->getLocale() }}",
                                    "format": "{{ trans('date.format.full.js') }}" }'
-                                   value="{{ isset($post)
+                                       value="{{ isset($post)
                                    ? old('date_published', df($post->published_at, \App\Constant\Dates::FORMAT_FULL))
                                    : old('date_published') }}">
-                            <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
+                                <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
+                            </div>
                         </div>
-                    </div>
 
-                    <button type="submit"
-                            class="btn btn-primary btn-flat">{{ isset($post)
+                        <button type="submit"
+                                class="btn btn-primary btn-flat">{{ isset($post)
                         ? trans('blog::blog.button.update')
                         : trans('blog::blog.button.create') }}</button>
                 </form>
@@ -156,10 +157,12 @@
     <link href='/packages/blog/css/blog.css' rel='stylesheet' type='text/css'>
     <link href='/libs/eonasdan-bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css' rel='stylesheet'
           type='text/css'>
+    <link rel="stylesheet" href="/libs/bootstrap-tagsinput/bootstrap-tagsinput.css">
 @endsection
 
 @section('js')
+    <script src="/libs/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
     <script src='/libs/moment/moment-with-locales.min.js'></script>
     <script src='/libs/eonasdan-bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js'></script>
-    <script src="/packages/blog/js/datetimepicker.js"></script>
+    <script src="/packages/blog/js/post.js"></script>
 @endsection

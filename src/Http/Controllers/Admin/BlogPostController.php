@@ -40,7 +40,9 @@ class BlogPostController extends Controller
     {
         $post = $post->find($id);
 
-        $allCountTags = PostTags::select('tag_id')->get()->toArray();
+        // It's first version of code. It's we need?
+
+        /*$allCountTags = PostTags::select('tag_id')->get()->toArray();
 
         if(isset($allCountTags)) {
             $countMaxTags = array_count_values(array_flatten($allCountTags));
@@ -49,10 +51,12 @@ class BlogPostController extends Controller
             $idPopularTags = array_keys($selectMaxCount);
 
             $tags = Tags::find($idPopularTags);
-        }
+        }*/
 
         \Title::prepend(trans('dashboard.title.prepend'));
         \Title::append(trans('bog::blog.post.edit'));
+
+        $tags = Tags::popularTags(20);
 
         $categories = Category::where('status', Category::STATUS_ACTIVE)->get();
 
