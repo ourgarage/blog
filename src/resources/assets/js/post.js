@@ -4,9 +4,10 @@ $('.add-tag').on('click', function() {
     $inputTags.tagsinput('add', newTag);
 });
 
-var param = $('#date_published').data('datetimepicker-locale');
+var language = $('#date_published').data('datetimepicker-locale');
+var dateFormat = $('#date_published').data('datetimepicker-format');
 
 $('#date_published').datetimepicker({
-    format: param.format,
-    locale: param.lang
+    format: dateFormat,
+    locale: language
 });

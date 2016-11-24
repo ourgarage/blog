@@ -123,8 +123,8 @@
                             <div class="col-md-2">
                                 <input id="date_published" type="text" name="date_published"
                                        class="form-control"
-                                       data-datetimepicker-locale='{"lang": "{{ app()->getLocale() }}",
-                                   "format": "{{ trans('date.format.full.js') }}" }'
+                                       data-datetimepicker-locale="{{ app()->getLocale() }}"
+                                       data-datetimepicker-format="{{ trans('date.format.full.js') }}"
                                        value="{{ isset($post)
                                    ? old('date_published', df($post->published_at, \App\Constant\Dates::FORMAT_FULL))
                                    : old('date_published') }}">
