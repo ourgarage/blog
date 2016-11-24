@@ -100,7 +100,8 @@ class BlogPostController extends Controller
 
     private function _setTags($tags_str, $post_id)
     {
-        PostTags::where('post_id', $post_id)->delete();
+        $post = Post::find($post_id);
+        $post->tags()->detach();
 
         $tags = explode(',', $tags_str);
 
@@ -109,15 +110,12 @@ class BlogPostController extends Controller
             $tag = mb_strtolower(trim($tag));
             $dbtag = Tags::where('tag', 'like', $tag)->first();
             if (empty($dbtag)) {
-                $dbtag = new Tags();
-                $dbtag->tag = strip_tags($tag);
-                $dbtag->save();
+                $post->tags()->create([
+                    'tag' => $tag
+                ]);
+            } else {
+                $post->tags()->attach($dbtag);
             }
-            $post_tag = new PostTags();
-
-            $post_tag->post_id = $post_id;
-            $post_tag->tag_id = $dbtag->id;
-            $post_tag->save();
         }
     }
 }
