@@ -21,9 +21,9 @@ class Tags extends Model
      * @param integer $take
      * @return object
      */
-    public static function popularTags($take)
+    public function popularTags($take)
     {
-        $tags = Tags::selectRaw("tags.*, count('post_tags.tag_id') as tags_count")
+        $tags = Tags::selectRaw("tags.tag, count('post_tags.tag_id') as tags_count")
             ->leftJoin('post_tags', 'post_tags.tag_id', '=', 'tags.id')
             ->groupBy('tags.id')
             ->orderBy('tags_count', 'desc')

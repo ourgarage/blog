@@ -36,27 +36,14 @@ class BlogPostController extends Controller
         return view('blog::admin.post.post', compact('categories'));
     }
 
-    public function edit($id, Post $post)
+    public function edit(Tags $tags, $id, Post $post)
     {
         $post = $post->find($id);
-
-        // It's first version of code. It's we need?
-
-        /*$allCountTags = PostTags::select('tag_id')->get()->toArray();
-
-        if(isset($allCountTags)) {
-            $countMaxTags = array_count_values(array_flatten($allCountTags));
-            arsort($countMaxTags);
-            $selectMaxCount = array_slice($countMaxTags, 0, 20, $preserve_keys = true);
-            $idPopularTags = array_keys($selectMaxCount);
-
-            $tags = Tags::find($idPopularTags);
-        }*/
 
         \Title::prepend(trans('dashboard.title.prepend'));
         \Title::append(trans('bog::blog.post.edit'));
 
-        $tags = Tags::popularTags(20);
+        $tags = $tags->popularTags(20);
 
         $categories = Category::where('status', Category::STATUS_ACTIVE)->get();
 
@@ -118,9 +105,7 @@ class BlogPostController extends Controller
         $tags = explode(',', $tags_str);
 
         foreach ($tags as $tag) {
-            if (trim($tag) == '') {
-                continue;
-            }
+
             $tag = mb_strtolower(trim($tag));
             $dbtag = Tags::where('tag', 'like', $tag)->first();
             if (empty($dbtag)) {
