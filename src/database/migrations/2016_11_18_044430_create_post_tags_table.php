@@ -17,7 +17,6 @@ class CreatePostTagsTable extends Migration
             $table->increments('id');
             $table->integer('post_id');
             $table->integer('tag_id');
-            $table->timestamps();
         });
     }
 
@@ -28,6 +27,6 @@ class CreatePostTagsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('post_tags');
+        Schema::drop('post_tags');
     }
 }

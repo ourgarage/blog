@@ -42,7 +42,7 @@ class BlogController extends Controller
         return view('blog::site.post', compact('post'));
     }
 
-    public function getTag(Tags $tags, $tag)
+    public function getByTag(Tags $tags, $tag)
     {
         $tags = $tags->where('tag', $tag)->first();
 

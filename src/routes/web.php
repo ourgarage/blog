@@ -52,6 +52,6 @@ Route::group(['middleware' => 'web'], function () {
         /**
          * Tags
          */
-        Route::get('/tags/{tag}', 'BlogController@getTag')->name('blog::get::tag');
+        Route::get('/tags/{tag}', 'BlogController@getByTag')->name('blog::get::tag');
     });
 });
