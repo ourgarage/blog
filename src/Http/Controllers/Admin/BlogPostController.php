@@ -21,7 +21,7 @@ class BlogPostController extends Controller
         \Title::prepend(trans('dashboard.title.prepend'));
         \Title::append(trans('blog::blog.post.title'));
 
-        $posts = Post::orderBy('id', 'desc')->paginate(20);
+        $posts = Post::orderBy('published_at', 'desc')->paginate(20);
 
         return view('blog::admin.post.index', compact('posts'));
     }
