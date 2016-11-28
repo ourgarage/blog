@@ -89,6 +89,12 @@ return [
         ]
     ],
 
+    'tags' => [
+        'title' => 'Tags',
+        'tag' => 'Posts by tag',
+        'popular' => 'Popular tags'
+    ],
+
     'notifications' => [
         'blog-settings-save' => 'Settings has been successfully saved',
     ],

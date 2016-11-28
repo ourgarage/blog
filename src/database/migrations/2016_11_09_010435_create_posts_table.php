@@ -27,8 +27,6 @@ class CreatePostsTable extends Migration
             $table->string('meta_title');
             $table->datetime('published_at');
             $table->timestamps();
-
-            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 

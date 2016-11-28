@@ -48,5 +48,10 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/category/{slug}', 'BlogController@category')->name('blog::users::category');
         Route::get('/posts', 'BlogController@posts')->name('blog::users::posts');
         Route::get('/post/{slug}', 'BlogController@post')->name('blog::users::post');
+
+        /**
+         * Tags
+         */
+        Route::get('/tags/{tag}', 'BlogController@getByTag')->name('blog::get::tag');
     });
 });
