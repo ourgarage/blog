@@ -36,7 +36,7 @@ class BlogPostController extends Controller
         return view('blog::admin.post.post', compact('categories'));
     }
 
-    public function edit(Tags $tags, $id, Post $post)
+    public function edit(Post $post, Tags $tags, $id)
     {
         $post = $post->find($id);
 
