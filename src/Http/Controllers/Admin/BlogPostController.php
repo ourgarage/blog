@@ -123,9 +123,11 @@ class BlogPostController extends Controller
     public function category(Category $category, $id)
     {
         $category = $category->findOrFail($id);
+        $categories = Category::all();
 
         \Title::prepend(trans('dashboard.title.prepend'));
-        \Title::append(trans('blog::blog.post.all-posts-in'));
+        \Title::append(trans('blog::blog.post.all-posts-in').$category->title);
 
+        return view('blog::admin.post.category-posts', compact('category', 'categories'));
     }
 }

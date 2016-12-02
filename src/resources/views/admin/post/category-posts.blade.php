@@ -10,24 +10,24 @@
 
 @section('body')
     <div class="blog-index">
+        <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="true">
+                {{ trans('blog::blog.post.view-category-posts') }}
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                @foreach($categories as $category)
+                    <li>
+                        <a href="{{ route('blog::admin::category-posts', ['id' => $category->id]) }}">
+                            {{ $category->title }}
+                        </a>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
 
-        @if(!$posts->isEmpty())
-            <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="true">
-                    {{ trans('blog::blog.post.view-category-posts') }}
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    @foreach($categories as $category)
-                        <li>
-                            <a href="{{ route('blog::admin::category-posts', ['id' => $category->id]) }}">
-                                {{ $category->title }}
-                            </a>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
+        @if(!$category->posts->isEmpty())
 
             <div class="table-responsive">
                 <table class="table table-hover">
@@ -36,21 +36,19 @@
                         <th>Id</th>
                         <th>{{ trans('blog::blog.post.table.uri') }}</th>
                         <th>{{ trans('blog::blog.post.table.title') }}</th>
-                        <th>{{ trans('blog::blog.post.table.category') }}</th>
                         <th>{{ trans('blog::blog.post.date-published') }}</th>
                         <th>{{ trans('blog::blog.post.table.created') }}</th>
                         <th>{{ trans('blog::blog.post.table.options') }}</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($posts as $post)
+                    @foreach($category->posts as $post)
                         <tr>
                             <th>{{ $post->id }}</th>
                             <td><a href="{{ route('blog::users::post', ['slug' => $post->slug]) }}"
                                    target="_blank">{{ $post->slug }}</a>
                             </td>
                             <td>{{ $post->title }}</td>
-                            <td>{{ $post->category->title }}</td>
                             <td>{{ df($post->published_at, \App\Constant\Dates::TYPE_AGO) }}</td>
                             <td>{{ df($post->created_at) }}</td>
                             <td class="for-form-inline">
@@ -95,7 +93,7 @@
                     @endforeach
                     </tbody>
                 </table>
-                {!! $posts->render() !!}
+
             </div>
         @else
             <div class="no-results text-center">
