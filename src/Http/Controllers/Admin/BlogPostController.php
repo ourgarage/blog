@@ -123,11 +123,12 @@ class BlogPostController extends Controller
     public function category(Category $category, $id)
     {
         $category = $category->findOrFail($id);
+        $posts = Post::where('category_id', $id)->orderBy('published_at', 'desc')->paginate(20);
         $categories = Category::all();
 
         \Title::prepend(trans('dashboard.title.prepend'));
         \Title::append(trans('blog::blog.post.all-posts-in').$category->title);
 
-        return view('blog::admin.post.category-posts', compact('category', 'categories'));
+        return view('blog::admin.post.category-posts', compact('category', 'categories', 'posts'));
     }
 }

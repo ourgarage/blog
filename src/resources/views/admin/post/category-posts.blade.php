@@ -1,7 +1,7 @@
 @extends('admin.main')
 
 @section('body-title')
-    {{ trans('blog::blog.post.view-category-posts') }} : {{ $category->title }}
+    {{ trans('blog::blog.post.view-category-posts') }}: {{ $category->title }}
 
     <a href="{{ route('blog::admin::posts::add') }}" class="pull-right btn btn-success">
         <i class="fa fa-plus"></i> {{ trans('blog::blog.button.create') }}
@@ -27,7 +27,7 @@
             </ul>
         </div>
 
-        @if(!$category->posts->isEmpty())
+        @if(!$posts->isEmpty())
 
             <div class="table-responsive">
                 <table class="table table-hover">
@@ -42,7 +42,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($category->posts as $post)
+                    @foreach($posts as $post)
                         <tr>
                             <th>{{ $post->id }}</th>
                             <td><a href="{{ route('blog::users::post', ['slug' => $post->slug]) }}"
@@ -93,7 +93,7 @@
                     @endforeach
                     </tbody>
                 </table>
-
+                {!! $posts->render() !!}
             </div>
         @else
             <div class="no-results text-center">
