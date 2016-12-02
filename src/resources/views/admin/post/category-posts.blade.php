@@ -1,7 +1,7 @@
 @extends('admin.main')
 
 @section('body-title')
-    {{ trans('blog::blog.post.title') }}
+    {{ trans('blog::blog.post.view-category-posts') }} : {{ $category->title }}
 
     <a href="{{ route('blog::admin::posts::add') }}" class="pull-right btn btn-success">
         <i class="fa fa-plus"></i> {{ trans('blog::blog.button.create') }}

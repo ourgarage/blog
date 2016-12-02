@@ -61,6 +61,8 @@ return [
         'edit' => 'Edit post',
         'category' => 'Select category',
         'date-published' => 'Date of publication',
+        'view-category-posts' => 'View all posts in category',
+        'all-posts-in' => 'All posts category',
 
         'table' => [
             'uri' => 'URI',
