@@ -63,17 +63,17 @@
                                     {{ csrf_field() }}
                                     @if($post->status == \Ourgarage\Blog\Models\Post::STATUS_ACTIVE)
                                         <button type="submit"
-                                                onclick="return buttonConfirmation(event, '@lang('blog::blog.post.popup.deactivate')')"
-                                                class="btn btn-xs btn-success" data-toggle="tooltip"
+                                                data-confirm="@lang('blog::blog.post.popup.deactivate')"
+                                                class="btn btn-xs btn-success popup-blog" data-toggle="tooltip"
                                                 data-placement="top"
                                                 title="{{ trans('users.tooltip.status') }}"><i class="fa fa-check"></i>
                                         </button>
                                     @else
                                         <button type="submit"
-                                                onclick="return buttonConfirmation(event, '@lang('blog::blog.post.popup.activate')')"
-                                                class="btn btn-xs btn-danger" data-toggle="tooltip" data-placement="top"
-                                                title="{{ trans('users.tooltip.status') }}"><i
-                                                    class="fa fa-power-off"></i>
+                                                data-confirm="@lang('blog::blog.post.popup.activate')"
+                                                class="btn btn-xs btn-danger popup-blog" data-toggle="tooltip"
+                                                data-placement="top" title="{{ trans('users.tooltip.status') }}">
+                                            <i class="fa fa-power-off"></i>
                                         </button>
                                     @endif
                                 </form>
@@ -89,9 +89,9 @@
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
                                     <button type="submit"
-                                            onclick="return buttonConfirmation(event, '@lang('blog::blog.post.popup.delete')')"
-                                            class="btn btn-xs btn-danger" data-toggle="tooltip" data-placement="top"
-                                            title="{{ trans('users.tooltip.delete') }}">
+                                            data-confirm="@lang('blog::blog.post.popup.delete')"
+                                            class="btn btn-xs btn-danger popup-blog" data-toggle="tooltip"
+                                            data-placement="top" title="{{ trans('users.tooltip.delete') }}">
                                         <i class="fa fa-remove"></i></button>
                                 </form>
                             </td>
@@ -113,4 +113,8 @@
 
 @section('css')
     <link href='/packages/blog/css/blog.css' rel='stylesheet' type='text/css'>
+@endsection
+
+@section('js')
+    <script src="/packages/blog/js/popup.js"></script>
 @endsection
