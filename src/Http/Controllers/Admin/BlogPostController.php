@@ -22,9 +22,8 @@ class BlogPostController extends Controller
         \Title::append(trans('blog::blog.post.title'));
 
         $posts = Post::orderBy('published_at', 'desc')->paginate(20);
-        $categories = Category::all();
 
-        return view('blog::admin.post.index', compact('posts', 'categories'));
+        return view('blog::admin.post.index', compact('posts'));
     }
 
     public function add()
@@ -124,11 +123,10 @@ class BlogPostController extends Controller
     {
         $category = $category->findOrFail($id);
         $posts = Post::where('category_id', $id)->orderBy('published_at', 'desc')->paginate(20);
-        $categories = Category::all();
 
         \Title::prepend(trans('dashboard.title.prepend'));
         \Title::append(trans('blog::blog.post.all-posts-in').$category->title);
 
-        return view('blog::admin.post.index', compact('category', 'categories', 'posts'));
+        return view('blog::admin.post.index', compact('category', 'posts'));
     }
 }
