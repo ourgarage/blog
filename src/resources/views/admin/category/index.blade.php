@@ -67,7 +67,8 @@
                                             data-confirm="@lang('blog::blog.category.popup.delete')"
                                             class="btn btn-xs btn-danger  popup-blog" data-toggle="tooltip"
                                             data-placement="top" title="{{ trans('users.tooltip.delete') }}">
-                                        <i class="fa fa-remove"></i></button>
+                                        <i class="fa fa-remove"></i>
+                                    </button>
                                 </form>
                             </td>
                         </tr>
