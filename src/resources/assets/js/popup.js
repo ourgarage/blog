@@ -10,18 +10,21 @@ $(function () {
         var params = $(this).data("params");
 
         swal({
-                title: "Ajax request example",
-                text: "Submit to run ajax request",
-                type: "info",
-                showCancelButton: true,
-                closeOnConfirm: false,
-                showLoaderOnConfirm: true,
-            },
-            function () {
-                setTimeout(function () {
-                    swal("Ajax request finished!");
-                }, 2000);
-            });
+            title: 'Are you sure?',
+            text: params.message,
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then(function () {
+            swal(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+            )
+        })
+
     });
 });
 
