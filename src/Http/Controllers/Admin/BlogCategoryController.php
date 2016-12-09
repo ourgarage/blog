@@ -73,9 +73,7 @@ class BlogCategoryController extends Controller
 
         //return redirect()->back();
 
-        $data = ['status' => 'success'];
-
-        return response()->json($data);
+        return response()->json(['status' => 'success']);
     }
 
     public function destroy($id)
