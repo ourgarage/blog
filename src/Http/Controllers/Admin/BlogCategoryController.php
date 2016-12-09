@@ -69,9 +69,13 @@ class BlogCategoryController extends Controller
             'status' => $category->status == Category::STATUS_ACTIVE ? Category::STATUS_DISABLED : Category::STATUS_ACTIVE,
         ]);
 
-        Notifications::success(trans('blog::blog.category.notifications.category-status-update'), 'top');
+        //Notifications::success(trans('blog::blog.category.notifications.category-status-update'), 'top');
 
-        return redirect()->back();
+        //return redirect()->back();
+
+        $data = ['status' => 'success'];
+
+        return response()->json($data);
     }
 
     public function destroy($id)

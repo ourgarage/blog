@@ -36,14 +36,24 @@
 
                                 @if($category->status == \Ourgarage\Blog\Models\Category::STATUS_ACTIVE)
                                     <button type="submit"
-                                            data-params='{"title": "", "message": "@lang('blog::blog.category.popup.deactivate')", "url" :"{{ route('blog::admin::categories::status-update', ['id' => $category->id]) }}"}'
+                                            data-params='{"title": "@lang('blog::blog.category.popup.title-deactivate')",
+                                            "text": "@lang('blog::blog.category.popup.deactivate')",
+                                            "url" :"{{ route('blog::admin::categories::status-update', ['id' => $category->id]) }}",
+                                            "type": "info",
+                                            "status": "@lang('blog::blog.category.popup.deactivate-status')",
+                                            "message": "@lang('blog::blog.category.popup.deactivated-text')"}'
                                             class="btn btn-xs btn-success" data-toggle="tooltip"
                                             data-placement="top"
                                             title="{{ trans('users.tooltip.status') }}"><i class="fa fa-check"></i>
                                     </button>
                                 @else
                                     <button type="submit"
-                                            data-confirm="@lang('blog::blog.category.popup.activate')"
+                                            data-params='{"title": "@lang('blog::blog.category.popup.title-activate')",
+                                            "text": "@lang('blog::blog.category.popup.activate')",
+                                            "url" :"{{ route('blog::admin::categories::status-update', ['id' => $category->id]) }}",
+                                            "type": "info",
+                                            "status": "@lang('blog::blog.category.popup.activate-status')",
+                                            "message": "@lang('blog::blog.category.popup.activated-text')"}'
                                             class="btn btn-xs btn-danger" data-toggle="tooltip"
                                             data-placement="top" title="{{ trans('users.tooltip.status') }}">
                                         <i class="fa fa-power-off"></i>

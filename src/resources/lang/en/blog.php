@@ -48,9 +48,15 @@ return [
 
         'popup' => [
             'title' => 'Edit category',
+            'title-deactivate' => 'Deactivate',
+            'title-activate' => 'Activate',
             'activate' => 'Do you want to activate this category?',
             'deactivate' => 'Do you want to deactivate this category?',
             'delete' => 'Do you want to delete this category?',
+            'activate-status' => 'Activated',
+            'deactivate-status' => 'Deactivated',
+            'activated-text' => 'Category has been activated',
+            'deactivated-text' => 'Category has been deactivated'
         ],
     ],
 
