@@ -33,33 +33,25 @@
                             <td>{{ $category->title }}</td>
                             <td>{{ df($category->created_at) }}</td>
                             <td class="for-form-inline">
-
+                                <form action="{{ route('blog::admin::categories::status-update', ['id' => $category->id]) }}"
+                                      method="POST">
+                                    {{ csrf_field() }}
                                 @if($category->status == \Ourgarage\Blog\Models\Category::STATUS_ACTIVE)
                                     <button type="submit"
-                                            data-params='{"title": "@lang('blog::blog.category.popup.title-deactivate')",
-                                            "text": "@lang('blog::blog.category.popup.deactivate')",
-                                            "url" :"{{ route('blog::admin::categories::status-update', ['id' => $category->id]) }}",
-                                            "type": "info",
-                                            "status": "@lang('blog::blog.category.popup.deactivate-status')",
-                                            "message": "@lang('blog::blog.category.popup.deactivated-text')"}'
+                                            data-confirm="@lang('blog::blog.category.popup.deactivate')"
                                             class="btn btn-xs btn-success" data-toggle="tooltip"
                                             data-placement="top"
                                             title="{{ trans('users.tooltip.status') }}"><i class="fa fa-check"></i>
                                     </button>
                                 @else
                                     <button type="submit"
-                                            data-params='{"title": "@lang('blog::blog.category.popup.title-activate')",
-                                            "text": "@lang('blog::blog.category.popup.activate')",
-                                            "url" :"{{ route('blog::admin::categories::status-update', ['id' => $category->id]) }}",
-                                            "type": "info",
-                                            "status": "@lang('blog::blog.category.popup.activate-status')",
-                                            "message": "@lang('blog::blog.category.popup.activated-text')"}'
+                                            data-confirm="@lang('blog::blog.category.popup.activate')"
                                             class="btn btn-xs btn-danger" data-toggle="tooltip"
                                             data-placement="top" title="{{ trans('users.tooltip.status') }}">
                                         <i class="fa fa-power-off"></i>
                                     </button>
                                 @endif
-
+                                </form>
                                 <a href="{{ route('blog::admin::categories::edit', ['id' => $category->id]) }}"
                                    class="btn btn-xs btn-warning" data-toggle="tooltip" data-placement="top"
                                    title="{{ trans('users.tooltip.edit') }}">
@@ -96,10 +88,8 @@
 
 @section('css')
     <link href="/packages/blog/css/blog.css" rel="stylesheet" type="text/css">
-    <link href="/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
 @endsection
 
 @section('js')
-    <script src="/libs/sweetalert2/sweetalert2.min.js"></script>
     <script src="/packages/blog/js/popup.js"></script>
 @endsection
