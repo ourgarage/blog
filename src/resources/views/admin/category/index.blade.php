@@ -36,21 +36,21 @@
                                 <form action="{{ route('blog::admin::categories::status-update', ['id' => $category->id]) }}"
                                       method="POST">
                                     {{ csrf_field() }}
-                                @if($category->status == \Ourgarage\Blog\Models\Category::STATUS_ACTIVE)
-                                    <button type="submit"
-                                            data-confirm="@lang('blog::blog.category.popup.deactivate')"
-                                            class="btn btn-xs btn-success" data-toggle="tooltip"
-                                            data-placement="top"
-                                            title="{{ trans('users.tooltip.status') }}"><i class="fa fa-check"></i>
-                                    </button>
-                                @else
-                                    <button type="submit"
-                                            data-confirm="@lang('blog::blog.category.popup.activate')"
-                                            class="btn btn-xs btn-danger" data-toggle="tooltip"
-                                            data-placement="top" title="{{ trans('users.tooltip.status') }}">
-                                        <i class="fa fa-power-off"></i>
-                                    </button>
-                                @endif
+                                    @if($category->status == \Ourgarage\Blog\Models\Category::STATUS_ACTIVE)
+                                        <button type="submit"
+                                                data-confirm="@lang('blog::blog.category.popup.deactivate')"
+                                                class="btn btn-xs btn-success" data-toggle="tooltip"
+                                                data-placement="top"
+                                                title="{{ trans('users.tooltip.status') }}"><i class="fa fa-check"></i>
+                                        </button>
+                                    @else
+                                        <button type="submit"
+                                                data-confirm="@lang('blog::blog.category.popup.activate')"
+                                                class="btn btn-xs btn-danger" data-toggle="tooltip"
+                                                data-placement="top" title="{{ trans('users.tooltip.status') }}">
+                                            <i class="fa fa-power-off"></i>
+                                        </button>
+                                    @endif
                                 </form>
                                 <a href="{{ route('blog::admin::categories::edit', ['id' => $category->id]) }}"
                                    class="btn btn-xs btn-warning" data-toggle="tooltip" data-placement="top"
