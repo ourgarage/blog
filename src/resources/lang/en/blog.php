@@ -50,7 +50,7 @@ return [
             'title' => 'Edit category',
             'activate' => 'Do you want to activate this category?',
             'deactivate' => 'Do you want to deactivate this category?',
-            'delete' => 'Do you want to delete this category?',
+            'delete' => 'Do you want to delete this category?'
         ],
     ],
 
@@ -61,6 +61,8 @@ return [
         'edit' => 'Edit post',
         'category' => 'Select category',
         'date-published' => 'Date of publication',
+        'view-category-posts' => 'View all posts in category',
+        'all-posts-in' => 'All posts category ',
 
         'table' => [
             'uri' => 'URI',

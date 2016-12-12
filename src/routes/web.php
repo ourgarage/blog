@@ -26,6 +26,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::put('/categories/store/{id}', 'BlogCategoryController@store')->name('blog::admin::categories::update');
         Route::post('/categories/{id}', 'BlogCategoryController@statusUpdate')->name('blog::admin::categories::status-update');
         Route::delete('/categories/delete/{id}', 'BlogCategoryController@destroy')->name('blog::admin::categories::delete');
+        Route::get('/category/{id}', 'BlogPostController@category')->name('blog::admin::category-posts');
 
         /**
          * Routes for posts of blog
