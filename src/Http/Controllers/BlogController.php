@@ -39,6 +39,8 @@ class BlogController extends Controller
             return abort('404');
         }
 
+        $post->increment('views');
+
         return view('blog::site.post', compact('post'));
     }
 

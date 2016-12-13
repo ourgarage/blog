@@ -87,7 +87,8 @@ return [
         ],
 
         'view' => [
-            'posted' => 'Posted'
+            'posted' => 'Posted',
+            'views' => 'Views'
         ]
     ],
 

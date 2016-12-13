@@ -41,6 +41,7 @@
                         <th>{{ trans('blog::blog.post.table.uri') }}</th>
                         <th>{{ trans('blog::blog.post.table.title') }}</th>
                         <th>{{ trans('blog::blog.post.table.category') }}</th>
+                        <th>{{ trans('blog::blog.post.view.views') }}</th>
                         <th>{{ trans('blog::blog.post.date-published') }}</th>
                         <th>{{ trans('blog::blog.post.table.created') }}</th>
                         <th>{{ trans('blog::blog.post.table.options') }}</th>
@@ -55,6 +56,7 @@
                             </td>
                             <td>{{ $post->title }}</td>
                             <td>{{ $post->category->title }}</td>
+                            <td>{{ $post->views }}</td>
                             <td>{{ df($post->published_at, \App\Constant\Dates::TYPE_AGO) }}</td>
                             <td>{{ df($post->created_at) }}</td>
                             <td class="for-form-inline">
