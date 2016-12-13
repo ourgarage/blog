@@ -23,6 +23,7 @@
                         @endforeach
                     @endif
                     <div class="text-right">
+                        {{ trans('blog::blog.post.view.views') }} : {{ $post->views }},
                         {{ trans('blog::blog.post.view.posted') }}
                         : {{ df($post->published_at, \App\Constant\Dates::TYPE_AGO) }}
                     </div>
