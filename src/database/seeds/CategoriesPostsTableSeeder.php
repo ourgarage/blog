@@ -31,6 +31,7 @@ class CategoriesPostsTableSeeder extends Seeder
         foreach (range(1, 30) as $post) {
             Post::create([
                 'category_id' => $faker->randomElement($category_id),
+                'views' => 0,
                 'status' => $faker->randomElement([Post::STATUS_DISABLED, Post::STATUS_ACTIVE]),
                 'title' => $faker->sentence,
                 'slug' => $faker->slug,

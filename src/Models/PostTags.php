@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class PostTags extends Model
 {
-    protected $table = 'post_tags';
+    protected $table = 'blog_post_tags';
 }
