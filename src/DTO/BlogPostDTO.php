@@ -60,6 +60,11 @@ class BlogPostDTO
     private $publishedAt;
     
     /**
+     * @var array
+     */
+    private $tags;
+    
+    /**
      * @return int
      */
     public function getId()
@@ -264,6 +269,25 @@ class BlogPostDTO
     public function setPublishedAt($publishedAt)
     {
         $this->publishedAt = $publishedAt;
+        
+        return $this;
+    }
+    
+    /**
+     * @return array
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+    
+    /**
+     * @param array $tags
+     * @return BlogPostDTO
+     */
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
         
         return $this;
     }

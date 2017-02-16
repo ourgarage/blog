@@ -98,7 +98,7 @@ class BlogPresenter
      */
     public function getAllPosts()
     {
-        return Post::orderBy('published_at', 'desc')->paginate(Post::PAGINATE);
+        return Post::with('category')->orderBy('published_at', 'desc')->paginate(Post::PAGINATE);
     }
     
     /**
@@ -129,17 +129,100 @@ class BlogPresenter
         return $tags;
     }
     
+    /**
+     * Create or update post. Add tags
+     *
+     * @param BlogPostDTO $dto
+     * @return bool
+     */
     public function createOrUpdatePost(BlogPostDTO $dto)
     {
-        $post = Post::findOrNew($id);
+        $post = Post::findOrNew($dto->getId());
+        
+        $post->title = $dto->getTitle();
+        $post->category_id = $dto->getCategoryId();
+        $post->slug = $dto->getSlug();
+        $post->content = $dto->getContent();
+        $post->meta_keywords = $dto->getMetaKeywords();
+        $post->meta_description = $dto->getMetaDescription();
+        $post->meta_title = $dto->getMetaTitle();
+        $post->published_at = $dto->getPublishedAt();
+        $post->save();
     
-        $post->title = request('title');
-        $post->category_id = request('category');
-        $post->slug = request('slug');
-        $post->content = request('content');
-        $post->meta_keywords = request('meta_keywords');
-        $post->meta_description = request('meta_description');
-        $post->meta_title = request('meta_title');
-        $post->published_at = Carbon::parse(request('date_published'));
+        $this->_setTags($dto->getTags(), $post->id);
+        
+        return true;
+    }
+    
+    /**
+     * Change status of post
+     *
+     * @param int $id
+     * @return bool
+     */
+    public function changeStatusPost($id)
+    {
+        $post = Post::find($id);
+    
+        $post->update([
+            'status' => $post->status == Post::STATUS_ACTIVE ? Post::STATUS_DISABLED : Post::STATUS_ACTIVE,
+        ]);
+        
+        return true;
+    }
+    
+    /**
+     * Get all posts in selected category
+     *
+     * @param int $idCategory
+     * @return Post[]
+     */
+    public function getPostsOfCategory($idCategory)
+    {
+        return Post::with('category')->where('category_id', $idCategory)
+            ->orderBy('published_at', 'desc')->paginate(Post::PAGINATE);
+    }
+    
+    /**
+     * Delete post from DB and detached tags
+     *
+     * @param int $id
+     * @return bool
+     */
+    public function destroyPost($id)
+    {
+        $post = Post::find($id);
+        
+        $post->tags()->detach();
+        $post->delete();
+        
+        return true;
+    }
+    
+    /**
+     * Add tags in DB. Attach/detach tags to post
+     *
+     * @param array $tags_str
+     * @param int $post_id
+     */
+    private function _setTags($tags_str, $post_id)
+    {
+        $post = Post::find($post_id);
+        $post->tags()->detach();
+        
+        $tags = explode(',', $tags_str);
+        
+        foreach ($tags as $tag) {
+            
+            $tag = mb_strtolower(trim($tag));
+            $dbtag = Tags::where('tag', 'like', $tag)->first();
+            if (empty($dbtag)) {
+                $post->tags()->create([
+                    'tag' => $tag
+                ]);
+            } else {
+                $post->tags()->attach($dbtag);
+            }
+        }
     }
 }
