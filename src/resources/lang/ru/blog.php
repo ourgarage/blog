@@ -13,6 +13,7 @@ return [
         'create-category' => 'Создать новую категорию',
         'update' => 'Обновить',
         'save' => 'Сохранить',
+        'back' => 'Назад'
     ],
 
     'settings' => [

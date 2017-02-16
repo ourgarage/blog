@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Ourgarage\Blog\DTO\BlogCategoryDTO;
-use Ourgarage\Blog\Models\Category;
 use Notifications;
 use Ourgarage\Blog\Presenters\BlogPresenter;
 use Ourgarage\Blog\Http\Requests\BlogCategoryRequest;
@@ -88,23 +87,33 @@ class BlogCategoryController extends Controller
 
         return redirect()->route('blog::admin::categories::index');
     }
-
-    public function statusUpdate($id, Category $category)
+    
+    /**
+     * Change status of category
+     *
+     * @param BlogPresenter $presenter
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function statusUpdate(BlogPresenter $presenter, $id)
     {
-        $category = $category->find($id);
-
-        $category->update([
-            'status' => $category->status == Category::STATUS_ACTIVE ? Category::STATUS_DISABLED : Category::STATUS_ACTIVE,
-        ]);
+        $presenter->changeStatusCategory($id);
 
         Notifications::success(trans('blog::blog.category.notifications.category-status-update'), 'top');
 
         return redirect()->back();
     }
-
-    public function destroy($id)
+    
+    /**
+     * Delete category
+     *
+     * @param BlogPresenter $presenter
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy(BlogPresenter $presenter, $id)
     {
-        Category::destroy($id);
+        $presenter->destroyCategory($id);
 
         Notifications::success(trans('blog::blog.category.notifications.category-delete'), 'top');
 

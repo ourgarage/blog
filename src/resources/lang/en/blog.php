@@ -13,6 +13,7 @@ return [
         'create-category' => 'Create new category',
         'update' => 'Update',
         'save' => 'Save',
+        'back' => 'Back'
     ],
 
     'settings' => [
