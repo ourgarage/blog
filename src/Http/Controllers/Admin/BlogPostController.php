@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Notifications;
 use Ourgarage\Blog\DTO\BlogPostDTO;
 use Ourgarage\Blog\Http\Requests\BlogPostRequest;
-use Ourgarage\Blog\Presenters\BlogPresenter;
+use Ourgarage\Blog\Presenters\Admin\BlogPresenter;
 
 class BlogPostController extends Controller
 {

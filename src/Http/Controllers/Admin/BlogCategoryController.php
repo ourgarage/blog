@@ -8,7 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Ourgarage\Blog\DTO\BlogCategoryDTO;
 use Notifications;
-use Ourgarage\Blog\Presenters\BlogPresenter;
+use Ourgarage\Blog\Presenters\Admin\BlogPresenter;
 use Ourgarage\Blog\Http\Requests\BlogCategoryRequest;
 
 class BlogCategoryController extends Controller

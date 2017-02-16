@@ -3,37 +3,49 @@
 namespace Ourgarage\Blog\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Carbon\Carbon;
-use Ourgarage\Blog\Models\Category;
-use Ourgarage\Blog\Models\Post;
-use Ourgarage\Blog\Models\Tags;
+use Ourgarage\Blog\Presenters\BlogPresenter;
 
 class BlogController extends Controller
 {
-    public function index(Post $posts)
+    /**
+     * Get index page of blog
+     *
+     * @param BlogPresenter $presenter
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index(BlogPresenter $presenter)
     {
-        $posts = $posts->where('status', Post::STATUS_ACTIVE)
-            ->where('published_at', '<=', Carbon::now())
-            ->latest()->take(5)->get();
+        $posts = $presenter->getPostsIndex();
 
-        return view('blog::site.index', compact('posts', 'categories'));
+        return view('blog::site.index', compact('posts'));
     }
-
-    public function category(Category $category, $slug)
+    
+    /**
+     * Get all posts in category
+     *
+     * @param BlogPresenter $presenter
+     * @param string $slug
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function category(BlogPresenter $presenter, $slug)
     {
-        $category = $category->where('status', Category::STATUS_ACTIVE)
-            ->where('slug', $slug)->first();
+        $category = $presenter->getCategoryBySlug($slug);
 
-        $posts = $category->posts()->where('status', Post::STATUS_ACTIVE)
-            ->where('published_at', '<=', Carbon::now())->paginate(20);
+        $posts = $presenter->getPostsOfCategory($category->id);
 
         return view('blog::site.category', compact('category', 'posts'));
     }
-
-    public function post(Post $post, $slug)
+    
+    /**
+     * Get post by slug
+     *
+     * @param BlogPresenter $presenter
+     * @param $slug
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function post(BlogPresenter $presenter, $slug)
     {
-        $post = $post->where('status', Post::STATUS_ACTIVE)
-            ->where('slug', $slug)->where('published_at', '<=', Carbon::now())->first();
+        $post = $presenter->getPostBySlug($slug);
 
         if(!isset($post)) {
             return abort('404');
@@ -44,17 +56,15 @@ class BlogController extends Controller
         return view('blog::site.post', compact('post'));
     }
 
-    public function getByTag(Tags $tags, $tag)
+    public function getByTag(BlogPresenter $presenter, $tag)
     {
-        $tags = $tags->where('tag', $tag)->first();
+        $tags = $presenter->getTag($tag);
 
         if(!isset($tags)){
             return abort('404');
         }
 
-        $posts = $tags->posts()->where('status', Post::STATUS_ACTIVE)
-            ->where('published_at', '<=', Carbon::now())
-            ->paginate(20);
+        $posts = $presenter->getPostsByTag($tags->tag);
 
         return view('blog::site.tag-posts', compact('tags', 'posts'));
     }
