@@ -23,7 +23,6 @@ class BlogCategoryController extends Controller
     {
         \Title::prepend(trans('dashboard.title.prepend'));
         \Title::append(trans('blog::blog.category.title'));
-
         $categories = $presenter->getAllCategories();
 
         return view('blog::admin.category.index', compact('categories'));
@@ -52,7 +51,6 @@ class BlogCategoryController extends Controller
     public function edit(BlogPresenter $presenter, $id)
     {
         $category = $presenter->getCategoryById($id);
-
         \Title::prepend(trans('dashboard.title.prepend'));
         \Title::append(trans('bog::blog.category.edit'));
 
@@ -78,11 +76,9 @@ class BlogCategoryController extends Controller
         $dto->setMetaTitle($request->meta_title);
         
         $presenter->createOrUpdateCategory($dto);
-
         $translationKey = (is_null($id))
             ? 'blog::blog.category.notifications.category-created-success'
             : 'blog::blog.category.notifications.category-update';
-
         Notifications::success(trans($translationKey), 'top');
 
         return redirect()->route('blog::admin::categories::index');
@@ -98,7 +94,6 @@ class BlogCategoryController extends Controller
     public function statusUpdate(BlogPresenter $presenter, $id)
     {
         $presenter->changeStatusCategory($id);
-
         Notifications::success(trans('blog::blog.category.notifications.category-status-update'), 'top');
 
         return redirect()->back();
@@ -114,7 +109,6 @@ class BlogCategoryController extends Controller
     public function destroy(BlogPresenter $presenter, $id)
     {
         $presenter->destroyCategory($id);
-
         Notifications::success(trans('blog::blog.category.notifications.category-delete'), 'top');
 
         return redirect()->back();

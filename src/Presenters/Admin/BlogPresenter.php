@@ -50,7 +50,6 @@ class BlogPresenter
     public function createOrUpdateCategory(BlogCategoryDTO $dto)
     {
         $category = Category::findOrNew($dto->getId());
-    
         $category->title = $dto->getTitle();
         $category->slug = $dto->getSlug();
         $category->meta_keywords = $dto->getMetaKeywords();
@@ -70,7 +69,6 @@ class BlogPresenter
     public function changeStatusCategory($id)
     {
         $category = Category::find($id);
-    
         $category->update([
             'status' => $category->status == Category::STATUS_ACTIVE ? Category::STATUS_DISABLED : Category::STATUS_ACTIVE,
         ]);
@@ -138,7 +136,6 @@ class BlogPresenter
     public function createOrUpdatePost(BlogPostDTO $dto)
     {
         $post = Post::findOrNew($dto->getId());
-        
         $post->title = $dto->getTitle();
         $post->category_id = $dto->getCategoryId();
         $post->slug = $dto->getSlug();
@@ -163,7 +160,6 @@ class BlogPresenter
     public function changeStatusPost($id)
     {
         $post = Post::find($id);
-    
         $post->update([
             'status' => $post->status == Post::STATUS_ACTIVE ? Post::STATUS_DISABLED : Post::STATUS_ACTIVE,
         ]);
@@ -192,7 +188,6 @@ class BlogPresenter
     public function destroyPost($id)
     {
         $post = Post::find($id);
-        
         $post->tags()->detach();
         $post->delete();
         
@@ -209,11 +204,9 @@ class BlogPresenter
     {
         $post = Post::find($post_id);
         $post->tags()->detach();
-        
         $tags = explode(',', $tags_str);
         
         foreach ($tags as $tag) {
-            
             $tag = mb_strtolower(trim($tag));
             $dbtag = Tags::where('tag', 'like', $tag)->first();
             if (empty($dbtag)) {

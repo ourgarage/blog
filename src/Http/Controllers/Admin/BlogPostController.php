@@ -22,7 +22,6 @@ class BlogPostController extends Controller
     {
         \Title::prepend(trans('dashboard.title.prepend'));
         \Title::append(trans('blog::blog.post.title'));
-        
         $posts = $presenter->getAllPosts();
         
         return view('blog::admin.post.index', compact('posts'));
@@ -38,7 +37,6 @@ class BlogPostController extends Controller
     {
         \Title::prepend(trans('dashboard.title.prepend'));
         \Title::append(trans('blog::blog.post.add'));
-        
         $tags = $presenter->popularTags(20);
         $categories = $presenter->getAllActiveCategories();
         
@@ -56,7 +54,6 @@ class BlogPostController extends Controller
     {
         \Title::prepend(trans('dashboard.title.prepend'));
         \Title::append(trans('bog::blog.post.edit'));
-        
         $post = $presenter->getPostById($id);
         $tags = $presenter->popularTags(20);
         $categories = $presenter->getAllActiveCategories();
@@ -87,11 +84,9 @@ class BlogPostController extends Controller
         $dto->setTags($request->tags);
         
         $presenter->createOrUpdatePost($dto);
-        
         $translationKey = (is_null($id))
             ? 'blog::blog.post.notifications.post-created-success'
             : 'blog::blog.post.notifications.post-update';
-        
         Notifications::success(trans($translationKey), 'top');
         
         return redirect()->route('blog::admin::posts::index');
@@ -107,7 +102,6 @@ class BlogPostController extends Controller
     public function statusUpdate(BlogPresenter $presenter, $id)
     {
         $presenter->changeStatusPost($id);
-        
         Notifications::success(trans('blog::blog.post.notifications.post-status-update'), 'top');
         
         return redirect()->back();
@@ -123,7 +117,6 @@ class BlogPostController extends Controller
     public function destroy(BlogPresenter $presenter, $id)
     {
         $presenter->destroyPost($id);
-        
         Notifications::success(trans('blog::blog.post.notifications.post-delete'), 'top');
         
         return redirect()->back();
@@ -140,7 +133,6 @@ class BlogPostController extends Controller
     {
         $category = $presenter->getCategoryById($id);
         $posts = $presenter->getPostsOfCategory($category->id);
-        
         \Title::prepend(trans('dashboard.title.prepend'));
         \Title::append(trans('blog::blog.post.all-posts-in') . $category->title);
         

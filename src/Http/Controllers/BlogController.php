@@ -30,7 +30,6 @@ class BlogController extends Controller
     public function category(BlogPresenter $presenter, $slug)
     {
         $category = $presenter->getCategoryBySlug($slug);
-
         $posts = $presenter->getPostsOfCategory($category);
 
         return view('blog::site.category', compact('category', 'posts'));
