@@ -31,7 +31,7 @@ class BlogController extends Controller
     {
         $category = $presenter->getCategoryBySlug($slug);
 
-        $posts = $presenter->getPostsOfCategory($category->id);
+        $posts = $presenter->getPostsOfCategory($category);
 
         return view('blog::site.category', compact('category', 'posts'));
     }
@@ -64,7 +64,7 @@ class BlogController extends Controller
             return abort('404');
         }
 
-        $posts = $presenter->getPostsByTag($tags->tag);
+        $posts = $presenter->getPostsByTag($tags);
 
         return view('blog::site.tag-posts', compact('tags', 'posts'));
     }

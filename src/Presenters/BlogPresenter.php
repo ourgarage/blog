@@ -33,16 +33,16 @@ class BlogPresenter
         return Category::where('status', Category::STATUS_ACTIVE)
             ->where('slug', $slug)->first();
     }
-    
+
     /**
      * Get all posts in selected category
      *
-     * @param int $categoryId
+     * @param object $category
      * @return Post[]
      */
-    public function getPostsOfCategory($categoryId)
+    public function getPostsOfCategory($category)
     {
-        return Post::where('category_id', $categoryId)->where('status', Post::STATUS_ACTIVE)
+        return $category->posts()->where('status', Post::STATUS_ACTIVE)
             ->where('published_at', '<=', Carbon::now())->paginate(Post::PAGINATE);
     }
     
@@ -68,13 +68,17 @@ class BlogPresenter
     {
         return Tags::where('tag', $tag)->first();
     }
-    
-    public function getPostsByTag($tag)
+
+    /**
+     * Get all posts per tag
+     *
+     * @param object $tags
+     * @return Post[]
+     */
+    public function getPostsByTag($tags)
     {
-        //$tags = $this->getTag($tag);
-        
         return $tags->posts()->where('status', Post::STATUS_ACTIVE)
             ->where('published_at', '<=', Carbon::now())
-            ->paginate(20);
+            ->paginate(Post::PAGINATE);
     }
 }
