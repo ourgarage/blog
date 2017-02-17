@@ -2,131 +2,140 @@
 
 namespace Ourgarage\Blog\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Ourgarage\Blog\Http\Requests\BlogPostRequest;
-use Ourgarage\Blog\Models\Post;
-use Ourgarage\Blog\Models\Category;
-use Ourgarage\Blog\Models\PostTags;
-use Ourgarage\Blog\Models\Tags;
-use Notifications;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Notifications;
+use Ourgarage\Blog\DTO\BlogPostDTO;
+use Ourgarage\Blog\Http\Requests\BlogPostRequest;
+use Ourgarage\Blog\Presenters\Admin\BlogPresenter;
 
 class BlogPostController extends Controller
 {
-    public function index()
+    /**
+     * Get all posts
+     *
+     * @param BlogPresenter $presenter
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index(BlogPresenter $presenter)
     {
         \Title::prepend(trans('dashboard.title.prepend'));
         \Title::append(trans('blog::blog.post.title'));
-
-        $posts = Post::orderBy('published_at', 'desc')->paginate(20);
-
+        $posts = $presenter->getAllPosts();
+        
         return view('blog::admin.post.index', compact('posts'));
     }
-
-    public function add()
+    
+    /**
+     * Get form for add new post
+     *
+     * @param BlogPresenter $presenter
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function add(BlogPresenter $presenter)
     {
         \Title::prepend(trans('dashboard.title.prepend'));
         \Title::append(trans('blog::blog.post.add'));
-
-        $categories = Category::where('status', Category::STATUS_ACTIVE)->get();
-
-        return view('blog::admin.post.post', compact('categories'));
+        $tags = $presenter->popularTags(20);
+        $categories = $presenter->getAllActiveCategories();
+        
+        return view('blog::admin.post.post', compact('categories', 'tags'));
     }
-
-    public function edit(Post $post, Tags $tags, $id)
+    
+    /**
+     * Get post for edit
+     *
+     * @param BlogPresenter $presenter
+     * @param int $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function edit(BlogPresenter $presenter, $id)
     {
-        $post = $post->find($id);
-
         \Title::prepend(trans('dashboard.title.prepend'));
         \Title::append(trans('bog::blog.post.edit'));
-
-        $tags = $tags->popularTags(20);
-
-        $categories = Category::where('status', Category::STATUS_ACTIVE)->get();
-
+        $post = $presenter->getPostById($id);
+        $tags = $presenter->popularTags(20);
+        $categories = $presenter->getAllActiveCategories();
+        
         return view('blog::admin.post.post', compact('post', 'categories', 'tags'));
     }
-
-    public function store(BlogPostRequest $request, $id = null)
+    
+    /**
+     * Create or update post
+     *
+     * @param BlogPostRequest $request
+     * @param BlogPresenter $presenter
+     * @param int|null $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store(BlogPostRequest $request, BlogPresenter $presenter, $id = null)
     {
-        $post = Post::findOrNew($id);
-
-        $post->title = request('title');
-        $post->category_id = request('category');
-        $post->slug = request('slug');
-        $post->content = request('content');
-        $post->meta_keywords = request('meta_keywords');
-        $post->meta_description = request('meta_description');
-        $post->meta_title = request('meta_title');
-        $post->published_at = Carbon::parse(request('date_published'));
-
-        $translationKey = (is_null($post->id))
+        $dto = new BlogPostDTO();
+        $dto->setId($id);
+        $dto->setCategoryId($request->category);
+        $dto->setTitle($request->title);
+        $dto->setSlug($request->slug);
+        $dto->setContent($request->content);
+        $dto->setMetaKeywords($request->meta_keywords);
+        $dto->setMetaDescription($request->meta_description);
+        $dto->setMetaTitle($request->meta_title);
+        $dto->setPublishedAt(Carbon::parse($request->date_published));
+        $dto->setTags($request->tags);
+        
+        $presenter->createOrUpdatePost($dto);
+        $translationKey = (is_null($id))
             ? 'blog::blog.post.notifications.post-created-success'
             : 'blog::blog.post.notifications.post-update';
-
-        $post->save();
-
-        $this->_setTags($request->get('tags'), $post->id);
-
         Notifications::success(trans($translationKey), 'top');
-
+        
         return redirect()->route('blog::admin::posts::index');
     }
-
-    public function statusUpdate($id, Post $post)
+    
+    /**
+     * Change status of post
+     *
+     * @param BlogPresenter $presenter
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function statusUpdate(BlogPresenter $presenter, $id)
     {
-        $post = $post->find($id);
-
-        $post->update([
-            'status' => $post->status == Post::STATUS_ACTIVE ? Post::STATUS_DISABLED : Post::STATUS_ACTIVE,
-        ]);
-
+        $presenter->changeStatusPost($id);
         Notifications::success(trans('blog::blog.post.notifications.post-status-update'), 'top');
-
+        
         return redirect()->back();
     }
-
-    public function destroy($id)
+    
+    /**
+     * Delete post
+     *
+     * @param BlogPresenter $presenter
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy(BlogPresenter $presenter, $id)
     {
-        Post::destroy($id);
-
+        $presenter->destroyPost($id);
         Notifications::success(trans('blog::blog.post.notifications.post-delete'), 'top');
-
+        
         return redirect()->back();
     }
-
-    private function _setTags($tags_str, $post_id)
+    
+    /**
+     * Get all posts in selected category
+     *
+     * @param BlogPresenter $presenter
+     * @param int $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function category(BlogPresenter $presenter, $id)
     {
-        $post = Post::find($post_id);
-        $post->tags()->detach();
-
-        $tags = explode(',', $tags_str);
-
-        foreach ($tags as $tag) {
-
-            $tag = mb_strtolower(trim($tag));
-            $dbtag = Tags::where('tag', 'like', $tag)->first();
-            if (empty($dbtag)) {
-                $post->tags()->create([
-                    'tag' => $tag
-                ]);
-            } else {
-                $post->tags()->attach($dbtag);
-            }
-        }
-    }
-
-    public function category(Category $category, $id)
-    {
-        $category = $category->findOrFail($id);
-        $posts = Post::where('category_id', $id)->orderBy('published_at', 'desc')->paginate(20);
-
+        $category = $presenter->getCategoryById($id);
+        $posts = $presenter->getPostsOfCategory($category->id);
         \Title::prepend(trans('dashboard.title.prepend'));
-        \Title::append(trans('blog::blog.post.all-posts-in').$category->title);
-
+        \Title::append(trans('blog::blog.post.all-posts-in') . $category->title);
+        
         return view('blog::admin.post.index', compact('category', 'posts'));
     }
 }

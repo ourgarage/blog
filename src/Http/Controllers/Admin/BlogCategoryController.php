@@ -6,22 +6,33 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Ourgarage\Blog\Models\Category;
+use Ourgarage\Blog\DTO\BlogCategoryDTO;
 use Notifications;
+use Ourgarage\Blog\Presenters\Admin\BlogPresenter;
 use Ourgarage\Blog\Http\Requests\BlogCategoryRequest;
 
 class BlogCategoryController extends Controller
 {
-    public function index()
+    /**
+     * Get all categories of blog
+     *
+     * @param BlogPresenter $presenter
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index(BlogPresenter $presenter)
     {
         \Title::prepend(trans('dashboard.title.prepend'));
         \Title::append(trans('blog::blog.category.title'));
-
-        $categories = Category::paginate(20);
+        $categories = $presenter->getAllCategories();
 
         return view('blog::admin.category.index', compact('categories'));
     }
-
+    
+    /**
+     * Form for add new category of blog
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function add()
     {
         \Title::prepend(trans('dashboard.title.prepend'));
@@ -29,55 +40,75 @@ class BlogCategoryController extends Controller
 
         return view('blog::admin.category.category');
     }
-
-    public function edit($id, Category $category)
+    
+    /**
+     * Edit category. Get category by id
+     *
+     * @param BlogPresenter $presenter
+     * @param int $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function edit(BlogPresenter $presenter, $id)
     {
-        $category = $category->find($id);
-
+        $category = $presenter->getCategoryById($id);
         \Title::prepend(trans('dashboard.title.prepend'));
         \Title::append(trans('bog::blog.category.edit'));
 
         return view('blog::admin.category.category', compact('category'));
     }
-
-    public function store(BlogCategoryRequest $request, $id = null)
+    
+    /**
+     * Create or update category
+     *
+     * @param BlogCategoryRequest $request
+     * @param BlogPresenter $presenter
+     * @param int|null $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store(BlogCategoryRequest $request, BlogPresenter $presenter, $id = null)
     {
-        $category = Category::findOrNew($id);
-
-        $category->title = $request->title;
-        $category->slug = $request->slug;
-        $category->meta_keywords = $request->meta_keywords;
-        $category->meta_description = $request->meta_description;
-        $category->meta_title = $request->meta_title;
-
-        $translationKey = (is_null($category->id))
+        $dto = new BlogCategoryDTO();
+        $dto->setId($id);
+        $dto->setTitle($request->title);
+        $dto->setSlug($request->slug);
+        $dto->setMetaDescription($request->meta_description);
+        $dto->setMetaKeywords($request->meta_keywords);
+        $dto->setMetaTitle($request->meta_title);
+        
+        $presenter->createOrUpdateCategory($dto);
+        $translationKey = (is_null($id))
             ? 'blog::blog.category.notifications.category-created-success'
             : 'blog::blog.category.notifications.category-update';
-
-        $category->save();
-
         Notifications::success(trans($translationKey), 'top');
 
         return redirect()->route('blog::admin::categories::index');
     }
-
-    public function statusUpdate($id, Category $category)
+    
+    /**
+     * Change status of category
+     *
+     * @param BlogPresenter $presenter
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function statusUpdate(BlogPresenter $presenter, $id)
     {
-        $category = $category->find($id);
-
-        $category->update([
-            'status' => $category->status == Category::STATUS_ACTIVE ? Category::STATUS_DISABLED : Category::STATUS_ACTIVE,
-        ]);
-
+        $presenter->changeStatusCategory($id);
         Notifications::success(trans('blog::blog.category.notifications.category-status-update'), 'top');
 
         return redirect()->back();
     }
-
-    public function destroy($id)
+    
+    /**
+     * Delete category
+     *
+     * @param BlogPresenter $presenter
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy(BlogPresenter $presenter, $id)
     {
-        Category::destroy($id);
-
+        $presenter->destroyCategory($id);
         Notifications::success(trans('blog::blog.category.notifications.category-delete'), 'top');
 
         return redirect()->back();

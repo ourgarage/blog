@@ -30,16 +30,16 @@ class BlogPostRequest extends FormRequest
         $rules = [
             'title' => [
                 'required',
-                Rule::unique('posts')->ignore($this->route('id')),
+                Rule::unique('blog_posts')->ignore($this->route('id')),
             ],
             'slug' => [
                 'required',
-                Rule::unique('posts')->ignore($this->route('id')),
+                Rule::unique('blog_posts')->ignore($this->route('id')),
             ],
             'category' => 'required',
             'content' => [
                 'required',
-                Rule::unique('posts')->ignore($this->route('id')),
+                Rule::unique('blog_posts')->ignore($this->route('id')),
             ],
             'meta_keywords' => 'required',
             'meta_description' => 'required',

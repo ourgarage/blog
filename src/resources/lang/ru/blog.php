@@ -13,6 +13,7 @@ return [
         'create-category' => 'Создать новую категорию',
         'update' => 'Обновить',
         'save' => 'Сохранить',
+        'back' => 'Назад'
     ],
 
     'settings' => [
@@ -63,6 +64,7 @@ return [
         'date-published' => 'Дата публикации',
         'view-category-posts' => 'Показать все публикации категории',
         'all-posts-in' => 'Все публикации категории ',
+        'content' => 'Контент публикации',
 
         'table' => [
             'uri' => 'URI',

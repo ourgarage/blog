@@ -89,9 +89,11 @@
                         </div>
                     </div>
 
+                    <h4>{{ trans('blog::blog.post.content') }}</h4>
+
                     <div class="form-group has-feedback">
-                        <div class="col-md-8 col-md-offset-2">
-                            <textarea name="content" class="form-control" rows="5">
+                        <div class="col-md-10">
+                            <textarea id="content" name="content" class="form-control" rows="15">
                                 {!! isset($post) ? old('content', $post->content) : old('content') !!}
                             </textarea>
                         </div>
@@ -106,37 +108,49 @@
                         </div>
                     </div>
 
-                        @if(!$tags->isEmpty())
-                            <div class="form-group has-feedback">
-                                <label class="col-md-2">{{ trans('blog::blog.tags.popular') }} :</label>
-                                <div class="col-md-8">
-                                    @foreach($tags as $tag)
-                                        <a href="#{{ $tag->tag }}" class="add-tag btn btn-xs btn-success"
-                                           data-tag="{{ $tag->tag }}">{{ $tag->tag }}</a>
-                                    @endforeach
-                                </div>
-                            </div>
-                        @endif
-
+                    @if(isset($tags) && !$tags->isEmpty())
                         <div class="form-group has-feedback">
-                            <label class="col-md-2">{{ trans('blog::blog.post.date-published') }} :</label>
-                            <div class="col-md-2">
-                                <input id="date_published" type="text" name="date_published"
-                                       class="form-control"
-                                       data-datetimepicker-locale="{{ app()->getLocale() }}"
-                                       data-datetimepicker-format="{{ trans('date.format.full.js') }}"
-                                       value="{{ isset($post)
-                                   ? old('date_published', df($post->published_at, \App\Constant\Dates::FORMAT_FULL))
-                                   : old('date_published') }}">
-                                <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
+                            <label class="col-md-2">{{ trans('blog::blog.tags.popular') }} :</label>
+                            <div class="col-md-8">
+                                @foreach($tags as $tag)
+                                    <a href="#{{ $tag->tag }}" class="add-tag btn btn-xs btn-success"
+                                       data-tag="{{ $tag->tag }}">{{ $tag->tag }}</a>
+                                @endforeach
                             </div>
                         </div>
+                    @endif
 
-                        <button type="submit"
-                                class="btn btn-primary btn-flat">{{ isset($post)
+                    <div class="form-group has-feedback">
+                        <label class="col-md-2">{{ trans('blog::blog.post.date-published') }} :</label>
+                        <div class="col-md-2">
+                            <input id="date_published" type="text" name="date_published"
+                                   class="form-control"
+                                   data-datetimepicker-locale="{{ app()->getLocale() }}"
+                                   data-datetimepicker-format="{{ trans('date.format.full.js') }}"
+                                   value="{{ isset($post)
+                                   ? old('date_published', df($post->published_at, \App\Constant\Dates::FORMAT_FULL))
+                                   : old('date_published') }}">
+                            <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <div class="col-md-2">
+                            <button type="submit"
+                                    class="btn btn-primary btn-flat">{{ isset($post)
                         ? trans('blog::blog.button.update')
                         : trans('blog::blog.button.create') }}</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group has-feedback">
+                        <div class="col-md-2">
+                            <a href="{{ url()->previous() }}" class="btn btn-default"><i class="fa fa-arrow-left"></i>
+                                {{ trans('blog::blog.button.back') }}
+                            </a>
+                        </div>
+                    </div>
                 </form>
+
             </div>
 
         @else
@@ -165,4 +179,8 @@
     <script src='/libs/moment/moment-with-locales.min.js'></script>
     <script src='/libs/eonasdan-bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js'></script>
     <script src="/packages/blog/js/post.js"></script>
+
+    @inject('connect', 'App\Http\ViewConnectors\EditorConnector')
+
+    {!! $connect->connect('#content', App::getLocale(), route('contacts::admin::imageUpload'), 'full') !!}
 @endsection

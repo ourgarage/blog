@@ -72,10 +72,22 @@
                     </div>
                 </div>
 
-                <button type="submit"
-                        class="btn btn-primary btn-flat">{{ isset($category)
+                <div class="form-group has-feedback">
+                    <div class="col-md-2">
+                        <button type="submit"
+                                class="btn btn-primary btn-flat">{{ isset($category)
                         ? trans('blog::blog.button.update')
                         : trans('blog::blog.button.create') }}</button>
+                    </div>
+                </div>
+
+                <div class="form-group has-feedback">
+                    <div class="col-md-2">
+                        <a href="{{ url()->previous() }}" class="btn btn-default"><i class="fa fa-arrow-left"></i>
+                            {{ trans('blog::blog.button.back') }}
+                        </a>
+                    </div>
+                </div>
             </form>
 
         </div>

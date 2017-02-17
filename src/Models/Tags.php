@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tags extends Model
 {
-    protected $table = 'tags';
+    protected $table = 'blog_tags';
 
     protected $fillable = [
         'tag'
@@ -14,21 +14,6 @@ class Tags extends Model
 
     public function posts()
     {
-        return $this->belongsToMany('Ourgarage\Blog\Models\Post', 'post_tags', 'tag_id', 'post_id');
-    }
-
-    /**
-     * @param integer $take
-     * @return object
-     */
-    public function popularTags($take)
-    {
-        $tags = Tags::selectRaw("tags.tag, count('post_tags.tag_id') as tags_count")
-            ->leftJoin('post_tags', 'post_tags.tag_id', '=', 'tags.id')
-            ->groupBy('tags.id')
-            ->orderBy('tags_count', 'desc')
-            ->take($take)->get();
-
-        return $tags;
+        return $this->belongsToMany('Ourgarage\Blog\Models\Post', 'blog_post_tags', 'tag_id', 'post_id');
     }
 }

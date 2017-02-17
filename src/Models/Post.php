@@ -8,8 +8,9 @@ class Post extends Model
 {
     const STATUS_ACTIVE = 1;
     const STATUS_DISABLED = 0;
+    const PAGINATE = 20;
 
-    protected $table = 'posts';
+    protected $table = 'blog_posts';
 
     protected $fillable = [
         'category_id', 'status', 'title', 'slug', 'content', 'meta_keywords', 'meta_description', 'meta_title',
@@ -23,6 +24,6 @@ class Post extends Model
 
     public function tags()
     {
-        return $this->belongsToMany('Ourgarage\Blog\Models\Tags', 'post_tags', 'post_id', 'tag_id');
+        return $this->belongsToMany('Ourgarage\Blog\Models\Tags', 'blog_post_tags', 'post_id', 'tag_id');
     }
 }
