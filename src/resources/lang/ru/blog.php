@@ -64,6 +64,7 @@ return [
         'date-published' => 'Дата публикации',
         'view-category-posts' => 'Показать все публикации категории',
         'all-posts-in' => 'Все публикации категории ',
+        'content' => 'Контент публикации',
 
         'table' => [
             'uri' => 'URI',

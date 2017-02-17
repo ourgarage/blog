@@ -89,9 +89,11 @@
                         </div>
                     </div>
 
+                    <h4>{{ trans('blog::blog.post.content') }}</h4>
+
                     <div class="form-group has-feedback">
-                        <div class="col-md-8 col-md-offset-2">
-                            <textarea name="content" class="form-control" rows="5">
+                        <div class="col-md-10">
+                            <textarea id="content" name="content" class="form-control" rows="15">
                                 {!! isset($post) ? old('content', $post->content) : old('content') !!}
                             </textarea>
                         </div>
@@ -177,4 +179,8 @@
     <script src='/libs/moment/moment-with-locales.min.js'></script>
     <script src='/libs/eonasdan-bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js'></script>
     <script src="/packages/blog/js/post.js"></script>
+
+    @inject('connect', 'App\Http\ViewConnectors\EditorConnector')
+
+    {!! $connect->connect('#content', App::getLocale(), route('contacts::admin::imageUpload'), 'full') !!}
 @endsection

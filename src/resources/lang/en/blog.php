@@ -64,6 +64,7 @@ return [
         'date-published' => 'Date of publication',
         'view-category-posts' => 'View all posts in category',
         'all-posts-in' => 'All posts category ',
+        'content' => 'Content of post',
 
         'table' => [
             'uri' => 'URI',
